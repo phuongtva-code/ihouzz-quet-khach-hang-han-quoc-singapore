@@ -12,8 +12,9 @@
 </head>
 <body>
 <div class="banner">
-  <span>Bản thử giao diện · iHouzz · quét cộng đồng người Việt tại Hàn Quốc</span>
-  <span class="dot" id="bn-note">● Số liệu trong đây là ví dụ — mọi số điện thoại đã che, tên viết tắt</span>
+  <div class="bn-msgs"><span>Bản thử giao diện · iHouzz · quét cộng đồng người Việt tại Hàn Quốc</span>
+  <span class="dot" id="bn-note">● Số liệu trong đây là ví dụ — mọi số điện thoại đã che, tên viết tắt</span></div>
+  <button class="btn line sm" id="bn-reset" type="button" title="Lưu lại các thao tác demo vừa làm (ở Màn 08), rồi đưa giao diện demo về đúng dữ liệu mẫu ban đầu">↺ Reset giao diện demo</button>
 </div>
 <div class="app paper" id="app">
   <aside class="side">
@@ -30,6 +31,7 @@
       <button data-s="s5"><b>05</b>Nguồn &amp; lịch quét</button>
       <button data-s="s6"><b>06</b>Biểu mẫu khảo sát</button>
       <button data-s="s7"><b>07</b>Phân bố địa lý</button>
+      <button data-s="s8"><b>08</b>Kết quả đã lưu</button>
     </nav>
     <div class="foot">
       <div class="co">[ 37.6°N · 127.0°E ]</div>
@@ -283,10 +285,10 @@
       </div>
       <div class="panel"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 class="sub" style="font-size:16px">Nhật ký truy cập · 7 ngày</h2><span class="label muted">Tự động, không sửa được</span></div>
         <ul class="log" id="s3-log">
-          <li><i>12.10 08:02</i><i>AI Team · Phương</i><span>Mở bảng · lọc nhóm Kết hôn</span></li>
-          <li><i>11.10 16:40</i><i>Marketing</i><span>Hiện số CN-0119 · lý do: xác nhận khảo sát</span></li>
-          <li><i>11.10 09:50</i><i>Hệ thống</i><span>CN-0122 nhắn DỪNG · chuyển Rút lại, khóa số</span></li>
-          <li><i>10.10 10:15</i><i>Pháp chế</i><span>Duyệt mẫu 50 dòng · không có dữ liệu ngoài phạm vi đồng ý</span></li>
+          <li data-seed="1"><i>12.10 08:02</i><i>AI Team · Phương</i><span>Mở bảng · lọc nhóm Kết hôn</span></li>
+          <li data-seed="1"><i>11.10 16:40</i><i>Marketing</i><span>Hiện số CN-0119 · lý do: xác nhận khảo sát</span></li>
+          <li data-seed="1"><i>11.10 09:50</i><i>Hệ thống</i><span>CN-0122 nhắn DỪNG · chuyển Rút lại, khóa số</span></li>
+          <li data-seed="1"><i>10.10 10:15</i><i>Pháp chế</i><span>Duyệt mẫu 50 dòng · không có dữ liệu ngoài phạm vi đồng ý</span></li>
         </ul>
       </div>
       <div class="ftr"><span class="m">Người tự để lại thông tin và đồng ý nhận liên hệ · biểu mẫu nêu rõ mục đích và cách rút lại</span><span class="m">Lưu riêng trong hệ thống (Lark)</span></div>
@@ -429,21 +431,21 @@
         <table class="tbl">
           <thead><tr><th>Nhóm</th><th>Nguồn</th><th>Cách lấy</th><th>Chạy mấy lần</th><th class="num">Số dòng</th><th>Lấy được liên hệ</th><th>Trạng thái</th></tr></thead>
           <tbody id="s5-rows">
-            <tr><td class="id">①</td><td class="strong">Bản đồ &amp; tìm kiếm (Naver, Google, Kakao)</td><td>Lấy tự động theo từ khóa từng thành phố</td><td>Hàng tháng</td><td class="num">1.912</td><td>Tổ chức</td><td><span class="st ok">Đang chạy</span></td></tr>
-            <tr><td class="id">①</td><td class="strong">Hội đoàn, trang tin, Đại sứ quán</td><td>Theo dõi website, trang Facebook</td><td>Hàng tuần</td><td class="num">86</td><td>Tổ chức</td><td><span class="st ok">Đang chạy</span></td></tr>
-            <tr><td class="id">①</td><td class="strong">Cơ quan phía Việt Nam (quản lý lao động, du học)</td><td>Tải danh sách công khai</td><td>Hàng quý</td><td class="num">214</td><td>Tổ chức</td><td><span class="st ok">Đang chạy</span></td></tr>
-            <tr><td class="id">①</td><td class="strong">Biểu mẫu Facebook · khảo sát · Zalo chính thức</td><td>Người tự điền, chảy thẳng vào hệ thống</td><td>Ngay khi có</td><td class="num">126</td><td>Người tự đồng ý</td><td><span class="st ok">Đang chạy</span></td></tr>
-            <tr><td class="id">①</td><td class="strong">YouTube (kênh chính thức)</td><td>Lấy tự động theo từ khóa tiếng Việt</td><td>Hàng tuần</td><td class="num">318</td><td>Cá nhân công khai</td><td><span class="st ok">Đang chạy</span></td></tr>
-            <tr class="sel"><td class="id">①</td><td class="strong">TikTok · theo hashtag</td><td>Người xem và ghi lại kênh</td><td>Hàng tuần</td><td class="num">44</td><td>Cá nhân công khai</td><td><span class="st warn">Trễ 2 ngày</span></td></tr>
-            <tr><td class="id">②</td><td class="strong">Thống kê xuất nhập cảnh · Bộ Tư pháp Hàn Quốc</td><td>Tải file, máy tự đọc bảng</td><td>Hàng tháng</td><td class="num">17 tỉnh × visa</td><td>—</td><td><span class="st ok">Đang chạy</span></td></tr>
-            <tr><td class="id">②</td><td class="strong">Thống kê cư dân nước ngoài theo quận (Hàn Quốc)</td><td>Tải bảng theo năm</td><td>Hàng năm</td><td class="num">229 quận</td><td>—</td><td><span class="st ok">Đang chạy</span></td></tr>
-            <tr><td class="id">②</td><td class="strong">Công cụ quảng cáo Facebook · ước lượng số người</td><td>Lấy tự động, KHÔNG chạy quảng cáo</td><td>Hàng tháng</td><td class="num">17 × giới × tuổi</td><td>—</td><td><span class="st bad">Lỗi kết nối</span></td></tr>
-            <tr><td class="id">②</td><td class="strong">Công cụ từ khóa Google · xu hướng tìm kiếm</td><td>Lấy tự động, lọc ở Hàn, tiếng Việt</td><td>Hàng tháng</td><td class="num">120 từ khóa</td><td>—</td><td><span class="st ok">Đang chạy</span></td></tr>
-            <tr><td class="id">③</td><td class="strong">Facebook · nhóm, trang công khai</td><td>Người vào xem, lấy mẫu bài đăng rồi ẩn danh</td><td>Hằng ngày</td><td class="num">1.102 bài</td><td>Không</td><td><span class="st">Người làm tay</span></td></tr>
-            <tr><td class="id">③</td><td class="strong">Bài đăng công khai từ các nguồn nhóm ①</td><td>Ẩn danh rồi máy tự xếp nhóm</td><td>Hằng ngày</td><td class="num">1.840</td><td>Không</td><td><span class="st ok">Đang chạy</span></td></tr>
-            <tr><td class="id">③</td><td class="strong">Reddit · diễn đàn + từ khóa tiếng Việt</td><td>Lấy tự động qua kênh chính thức, rồi ẩn danh</td><td>Hằng ngày</td><td class="num">0</td><td>Không</td><td><span class="st info">Chờ bật kết nối</span></td></tr>
-            <tr><td class="id">③</td><td class="strong">Quora · chủ đề người Việt ở Hàn</td><td>Không lấy tự động được → người lấy mẫu rồi ẩn danh</td><td>Hàng tuần</td><td class="num">0</td><td>Không</td><td><span class="st">Người làm tay</span></td></tr>
-            <tr><td class="id">③</td><td class="strong">Tài liệu công khai về gửi tiền, tài chính</td><td>Người đọc, tóm tắt</td><td>Hàng tháng</td><td class="num">0</td><td>Không</td><td><span class="st info">Chờ lịch</span></td></tr>
+            <tr data-seed="1"><td class="id">①</td><td class="strong">Bản đồ &amp; tìm kiếm (Naver, Google, Kakao)</td><td>Lấy tự động theo từ khóa từng thành phố</td><td>Hàng tháng</td><td class="num">1.912</td><td>Tổ chức</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr data-seed="1"><td class="id">①</td><td class="strong">Hội đoàn, trang tin, Đại sứ quán</td><td>Theo dõi website, trang Facebook</td><td>Hàng tuần</td><td class="num">86</td><td>Tổ chức</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr data-seed="1"><td class="id">①</td><td class="strong">Cơ quan phía Việt Nam (quản lý lao động, du học)</td><td>Tải danh sách công khai</td><td>Hàng quý</td><td class="num">214</td><td>Tổ chức</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr data-seed="1"><td class="id">①</td><td class="strong">Biểu mẫu Facebook · khảo sát · Zalo chính thức</td><td>Người tự điền, chảy thẳng vào hệ thống</td><td>Ngay khi có</td><td class="num">126</td><td>Người tự đồng ý</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr data-seed="1"><td class="id">①</td><td class="strong">YouTube (kênh chính thức)</td><td>Lấy tự động theo từ khóa tiếng Việt</td><td>Hàng tuần</td><td class="num">318</td><td>Cá nhân công khai</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr class="sel" data-seed="1"><td class="id">①</td><td class="strong">TikTok · theo hashtag</td><td>Người xem và ghi lại kênh</td><td>Hàng tuần</td><td class="num">44</td><td>Cá nhân công khai</td><td><span class="st warn">Trễ 2 ngày</span></td></tr>
+            <tr data-seed="1"><td class="id">②</td><td class="strong">Thống kê xuất nhập cảnh · Bộ Tư pháp Hàn Quốc</td><td>Tải file, máy tự đọc bảng</td><td>Hàng tháng</td><td class="num">17 tỉnh × visa</td><td>—</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr data-seed="1"><td class="id">②</td><td class="strong">Thống kê cư dân nước ngoài theo quận (Hàn Quốc)</td><td>Tải bảng theo năm</td><td>Hàng năm</td><td class="num">229 quận</td><td>—</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr data-seed="1"><td class="id">②</td><td class="strong">Công cụ quảng cáo Facebook · ước lượng số người</td><td>Lấy tự động, KHÔNG chạy quảng cáo</td><td>Hàng tháng</td><td class="num">17 × giới × tuổi</td><td>—</td><td><span class="st bad">Lỗi kết nối</span></td></tr>
+            <tr data-seed="1"><td class="id">②</td><td class="strong">Công cụ từ khóa Google · xu hướng tìm kiếm</td><td>Lấy tự động, lọc ở Hàn, tiếng Việt</td><td>Hàng tháng</td><td class="num">120 từ khóa</td><td>—</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr data-seed="1"><td class="id">③</td><td class="strong">Facebook · nhóm, trang công khai</td><td>Người vào xem, lấy mẫu bài đăng rồi ẩn danh</td><td>Hằng ngày</td><td class="num">1.102 bài</td><td>Không</td><td><span class="st">Người làm tay</span></td></tr>
+            <tr data-seed="1"><td class="id">③</td><td class="strong">Bài đăng công khai từ các nguồn nhóm ①</td><td>Ẩn danh rồi máy tự xếp nhóm</td><td>Hằng ngày</td><td class="num">1.840</td><td>Không</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr data-seed="1"><td class="id">③</td><td class="strong">Reddit · diễn đàn + từ khóa tiếng Việt</td><td>Lấy tự động qua kênh chính thức, rồi ẩn danh</td><td>Hằng ngày</td><td class="num">0</td><td>Không</td><td><span class="st info">Chờ bật kết nối</span></td></tr>
+            <tr data-seed="1"><td class="id">③</td><td class="strong">Quora · chủ đề người Việt ở Hàn</td><td>Không lấy tự động được → người lấy mẫu rồi ẩn danh</td><td>Hàng tuần</td><td class="num">0</td><td>Không</td><td><span class="st">Người làm tay</span></td></tr>
+            <tr data-seed="1"><td class="id">③</td><td class="strong">Tài liệu công khai về gửi tiền, tài chính</td><td>Người đọc, tóm tắt</td><td>Hàng tháng</td><td class="num">0</td><td>Không</td><td><span class="st info">Chờ lịch</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -642,6 +644,24 @@
       </div>
 
       <div class="ftr"><span class="m">Trái: số chính thức (cơ quan Hàn Quốc) · Phải: quê tự khai trong biểu mẫu đồng ý · Hành lang: chỉ từ dòng có cả hai</span><span class="m">Bài đăng công khai = tín hiệu tham khảo, không phải số đo</span></div>
+    </section>
+
+    <!-- 08 KẾT QUẢ ĐÃ LƯU -->
+    <section class="screen" id="s8">
+      <div class="head">
+        <div><div class="sechead"><span class="num">08</span><span class="nm">Kết quả đã lưu · lịch sử Reset</span></div><h1 class="title">Những lần đã lưu trước khi Reset giao diện demo</h1></div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span class="st info">Lưu trong trình duyệt này</span><button class="btn line sm" type="button" data-s8delall>Xoá tất cả</button></div>
+      </div>
+      <div class="alert"><div>
+        <p class="at">Trang này dùng để làm gì</p>
+        <p class="ax">Mỗi lần bấm <b>"↺ Reset giao diện demo"</b> ở thanh trên cùng, các thao tác bạn vừa làm trong bản thử (thêm nguồn, xác nhận nhãn, hiện số…) được tóm tắt và lưu lại ở đây, sau đó toàn bộ giao diện demo trở về đúng dữ liệu mẫu ban đầu — trắng trơn như lúc mới mở. Dữ liệu này chỉ lưu trong trình duyệt đang dùng (localStorage), không gửi đi đâu, và không mất khi Reset lần sau.</p>
+      </div></div>
+      <div id="s8-empty" class="emptybox">
+        <h2 class="sub">Chưa có lần Reset nào</h2>
+        <p class="help" style="max-width:520px">Hãy thử vài thao tác demo — thêm nguồn ở Màn 05, xác nhận nhãn ở Màn 04, hiện số ở Màn 03 — rồi bấm nút <b>Reset giao diện demo</b> ở thanh trên cùng. Kết quả lần đó sẽ hiện ra ở đây.</p>
+      </div>
+      <div id="s8-list" style="display:flex;flex-direction:column;gap:16px"></div>
+      <div class="ftr"><span class="m">Chỉ lưu trên trình duyệt đang dùng · không đồng bộ giữa các máy</span><span class="m">08 · Kết quả đã lưu</span></div>
     </section>
 
   </main>
