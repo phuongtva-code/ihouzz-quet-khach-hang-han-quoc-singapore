@@ -21,6 +21,12 @@ Chạy thật:
     export REDDIT_CLIENT_ID=...  REDDIT_CLIENT_SECRET=...  REDDIT_USER_AGENT="ihouzz-scan/0.1 by u/xxx"
     export ANTHROPIC_API_KEY=...            # để AI phân loại; thiếu thì dùng nhãn tạm
     python3 reddit_ingest.py --days 7 --limit 60 --out out/reddit_signals.jsonl
+
+Mã thoát:  0 = xong · 1 = thiếu thư viện/khóa, khóa Reddit sai (401)
+           4 = Reddit chặn (403/429): dừng ngay, KHÔNG né, báo IT rồi chạy lại sau
+
+Bài chỉ được ghi vào danh sách "đã thấy" (--seen) khi đã phân loại thật thành công.
+Bài mang nhãn tạm (thiếu khóa, AI lỗi) sẽ được thử lại ở lượt sau, không mất.
 """
 
 import argparse
@@ -93,11 +99,26 @@ def excerpt(text, n=200):
 # ----------------------------------------------------------------------------
 # THU THẬP (Reddit API, qua praw)
 # ----------------------------------------------------------------------------
+EXIT_BLOCKED = 4   # Reddit trả 403/429: dừng, không né (ranh giới dữ liệu số 4)
+
+
+class BlockedError(Exception):
+    """Nguồn chặn truy cập (403/429). Dừng cả lượt, không thử tiếp từ khóa khác."""
+
+
+def _http_status(e):
+    """Mã HTTP của một lỗi prawcore (nếu có), để nhận ra 401/403/429."""
+    resp = getattr(e, "response", None)
+    return getattr(resp, "status_code", None)
+
+
 def fetch_reddit(days, limit_per_query):
     """Trả về list dict thô {id, subreddit, created_utc, title, body}.
-    Không bao giờ đọc .author để tránh lưu định danh."""
+    Không bao giờ đọc .author để tránh lưu định danh.
+    403/429 từ Reddit -> BlockedError (dừng cả lượt). 401 -> thoát mã 1 (khóa sai)."""
     try:
         import praw  # import trễ: self-test không cần praw
+        import prawcore
     except ImportError:
         sys.exit("Thiếu praw. Cài: pip install praw")
 
@@ -130,7 +151,15 @@ def fetch_reddit(days, limit_per_query):
                     "body": getattr(s, "selftext", "") or "",
                     "matched_keyword": kw,
                 })
-        except Exception as e:  # một từ khóa lỗi không làm hỏng cả lượt
+        except prawcore.exceptions.PrawcoreException as e:
+            status = _http_status(e)
+            if status in (403, 429) or isinstance(e, prawcore.exceptions.Forbidden):
+                # Bị chặn hoặc quá giới hạn: dừng NGAY, không thử từ khóa khác, không đổi cách gọi.
+                raise BlockedError(f"Reddit trả HTTP {status or 403} khi tìm '{kw}'") from e
+            if status == 401 or isinstance(e, prawcore.exceptions.OAuthException):
+                sys.exit("Reddit từ chối khóa (401): kiểm tra REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET.")
+            print(f"  ! lỗi khi tìm '{kw}': {e}", file=sys.stderr)  # lỗi khác: bỏ từ khóa này
+        except Exception as e:  # một từ khóa lỗi (mạng, dữ liệu lạ) không làm hỏng cả lượt
             print(f"  ! lỗi khi tìm '{kw}': {e}", file=sys.stderr)
         time.sleep(1)  # lịch sự với API
     return rows
@@ -184,6 +213,9 @@ def classify(text):
     return data
 
 
+_AD_WORDS = re.compile(r"(?<!\w)(bán|ib|inbox|liên hệ|giá tốt|sale)(?!\w)")
+
+
 def _stub_classify(text):
     """Nhãn tạm bằng luật đơn giản (khi chưa có ANTHROPIC_API_KEY)."""
     low = anonymize(text).lower()
@@ -196,7 +228,8 @@ def _stub_classify(text):
         chu_de = "Việc làm và visa"
     elif any(k in low for k in ["về nước", "định cư", "hồi hương"]):
         chu_de = "Về nước, định cư"
-    is_ad = any(k in low for k in ["bán", "ib", "inbox", "liên hệ", "giá tốt", "sale"])
+    # Khớp theo từ nguyên vẹn, để "ib" không bắt nhầm "possible", "describe"...
+    is_ad = bool(_AD_WORDS.search(low))
     return {
         "chu_de": chu_de,
         "nhu_cau_ro": "Chỉ bàn luận",
@@ -249,42 +282,70 @@ def push_to_lark(records):
 # ----------------------------------------------------------------------------
 # CHẠY
 # ----------------------------------------------------------------------------
-def run(args):
-    print(f"[1/4] Thu thập Reddit · {len(SUBREDDITS)} subreddit · {len(KEYWORDS)} từ khóa …")
-    raw = fetch_reddit(args.days, args.limit)
-    print(f"      {len(raw)} bài thô.")
+def process_rows(raw, seen_hashes, classify_fn=None):
+    """Làm sạch, ẩn danh, phân loại. Trả về (out, dropped, tam).
 
-    print("[2/4] Làm sạch, ẩn danh & [3/4] phân loại …")
-    out, seen_hashes, dropped = [], _load_seen(args.seen), 0
+    seen_hashes được cập nhật TẠI CHỖ, nhưng chỉ với bài đã phân loại thật xong
+    (kể cả bài quá ngắn hay quảng cáo đã xét). Bài mang nhãn tạm (_nhan_tam: thiếu
+    khóa hoặc AI lỗi) KHÔNG được ghi "đã thấy", để lượt sau thử phân loại lại —
+    trước đây bài này bị export_for_page.py --bo-nhan-tam loại rồi mất vĩnh viễn."""
+    classify_fn = classify_fn or classify
+    out, dropped, tam = [], 0, 0
     for r in raw:
         h = hashlib.sha1(r["id"].encode()).hexdigest()  # khử trùng không lưu id gốc
         if h in seen_hashes:
             continue
-        seen_hashes.add(h)
         text = anonymize((r["title"] + ". " + r["body"]).strip())
         if len(text) < 15:
+            seen_hashes.add(h)  # bài rỗng: không cần xét lại
             continue
-        cls = classify(text)
+        cls = classify_fn(text)
+        if cls.get("_nhan_tam"):
+            tam += 1            # giữ trong file để xem, nhưng KHÔNG đánh dấu đã thấy
+        else:
+            seen_hashes.add(h)
         if cls.get("la_quang_cao"):
             dropped += 1
             continue  # loại quảng cáo khỏi thống kê nhu cầu
-        day = dt.datetime.utcfromtimestamp(r["created_utc"]).strftime("%Y-%m-%d")
         out.append({
             "source": "reddit", "subreddit": r["subreddit"],
-            "ngay_dang": day, "tuan": _isoweek(r["created_utc"]),
+            "ngay_dang": _utc_day(r["created_utc"]), "tuan": _isoweek(r["created_utc"]),
             "matched_keyword": r["matched_keyword"], **{k: v for k, v in cls.items()},
         })
+    return out, dropped, tam
+
+
+def run(args):
+    print(f"[1/4] Thu thập Reddit · {len(SUBREDDITS)} subreddit · {len(KEYWORDS)} từ khóa …")
+    try:
+        raw = fetch_reddit(args.days, args.limit)
+    except BlockedError as e:
+        # Ranh giới dữ liệu số 4: nguồn chặn thì dừng và báo, không dùng cách vòng.
+        print(f"DỪNG: {e}. Không thử tiếp, không đổi cách gọi. Báo IT và chạy lại sau.",
+              file=sys.stderr)
+        sys.exit(EXIT_BLOCKED)
+    print(f"      {len(raw)} bài thô.")
+
+    print("[2/4] Làm sạch, ẩn danh & [3/4] phân loại …")
+    seen_hashes = _load_seen(args.seen)
+    out, dropped, tam = process_rows(raw, seen_hashes)
 
     print(f"      giữ {len(out)} tín hiệu · loại {dropped} quảng cáo.")
+    if tam:
+        print(f"      {tam} bài mang nhãn tạm (chưa đánh dấu đã thấy, lượt sau sẽ phân loại lại).")
     _write_jsonl(out, args.out)
     _save_seen(seen_hashes, args.seen)
     print(f"[4/4] Đã ghi {args.out}")
     if not args.no_lark:
-        push_to_lark(out)
+        push_to_lark([r for r in out if not r.get("_nhan_tam")])  # Lark chỉ nhận nhãn thật
+
+
+def _utc_day(ts):
+    return dt.datetime.fromtimestamp(ts, dt.timezone.utc).strftime("%Y-%m-%d")
 
 
 def _isoweek(ts):
-    d = dt.datetime.utcfromtimestamp(ts).isocalendar()
+    d = dt.datetime.fromtimestamp(ts, dt.timezone.utc).isocalendar()
     return f"{d[0]}-W{d[1]:02d}"
 
 
@@ -322,7 +383,45 @@ def self_test():
         assert "@" not in a and "http" not in a and "4821" not in a and "u/" not in a, a
         c = classify(a)
         print(json.dumps({"anon": a, "cls": c}, ensure_ascii=False, indent=2))
-    print("\nself-test: OK — ẩn danh sạch, phân loại chạy." if ok else "FAIL")
+
+    # Nhãn tạm: "ib" chỉ bắt từ nguyên vẹn, không bắt "possible"/"describe".
+    assert not _stub_classify("Is it possible to describe the EPS visa process?")["la_quang_cao"]
+    assert _stub_classify("Có đất nền giá tốt, ib mình nhé")["la_quang_cao"]
+
+    # Danh sách "đã thấy": chỉ ghi khi phân loại thật thành công.
+    raw = [
+        {"id": "a1", "subreddit": "korea", "created_utc": 1_760_000_000, "title": "Gửi tiền về",
+         "body": "mua đất ở quê cho bố mẹ, ai có kinh nghiệm", "matched_keyword": "gửi tiền về"},
+        {"id": "a2", "subreddit": "korea", "created_utc": 1_760_000_000, "title": "Về nước",
+         "body": "định cư lại Đà Nẵng có khó không", "matched_keyword": "về nước"},
+        {"id": "a3", "subreddit": "korea", "created_utc": 1_760_000_000, "title": "x",
+         "body": "", "matched_keyword": "về nước"},
+    ]
+    real = {"chu_de": "Nhà đất tại VN", "nhu_cau_ro": "Có", "muc_cu_the": "Hỏi chung",
+            "dia_phuong_vn": "", "noi_o_tai_han": "", "nhom_nguoi": "Lao động",
+            "ngon_ngu": "Tiếng Việt", "sac_thai": "Trung tính", "la_quang_cao": False,
+            "trich_doan": "Hỏi kinh nghiệm mua đất ở quê."}
+    calls = {"n": 0}
+
+    def fake_classify(text):  # bài 1 phân loại thật; bài 2 AI lỗi -> nhãn tạm
+        calls["n"] += 1
+        return dict(real) if calls["n"] == 1 else _stub_classify(text)
+
+    seen = set()
+    out, dropped, tam = process_rows(raw, seen, fake_classify)
+    h = lambda i: hashlib.sha1(i.encode()).hexdigest()
+    assert len(out) == 2 and tam == 1 and dropped == 0, (len(out), tam, dropped)
+    assert h("a1") in seen, "bài phân loại thật phải được đánh dấu đã thấy"
+    assert h("a2") not in seen, "bài nhãn tạm KHÔNG được đánh dấu đã thấy (để lượt sau thử lại)"
+    assert h("a3") in seen, "bài rỗng được đánh dấu đã thấy"
+    assert out[0]["ngay_dang"] == "2025-10-09" and out[0]["tuan"] == "2025-W41", out[0]
+    # Lượt sau: bài 2 được xử lý lại, bài 1 và 3 bỏ qua.
+    out2, _, tam2 = process_rows(raw, seen, lambda t: dict(real))
+    assert len(out2) == 1 and tam2 == 0 and h("a2") in seen, (len(out2), tam2)
+    assert "_nhan_tam" not in out2[0]
+
+    print("\nself-test: OK — ẩn danh sạch, phân loại chạy, nhãn tạm không bị đánh dấu đã thấy, "
+          "'ib' chỉ bắt từ nguyên vẹn." if ok else "FAIL")
 
 
 def main():
