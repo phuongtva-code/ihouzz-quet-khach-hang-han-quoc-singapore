@@ -89,7 +89,8 @@ def validate_row(row: dict, cfg: dict) -> tuple[dict | None, str, list[str]]:
     if not re.match(r"^https?://", link, re.I):
         return None, "link_nguon phải là đường link http(s) tới trang công khai", warns
     if _banned(link, d["banned_url_patterns"]):
-        return None, "link_nguon là mạng xã hội hoặc ứng dụng nhắn tin: không nạp ở đây", warns
+        return None, ("link_nguon là mạng xã hội, ứng dụng nhắn tin hoặc Google Maps: không nạp ở đây "
+                      "(tên/địa chỉ từ Google Maps không được lưu vào CSDL riêng)"), warns
     name = row["ten"]
     if "@" in name or re.search(r"\d{8,}", name):
         return None, "tên có vẻ là email hoặc số điện thoại, không phải tên doanh nghiệp", warns
@@ -276,9 +277,13 @@ def self_test() -> int:
         "Cty Không Nguồn,Hàn Quốc,Nguồn,,Seoul,,,,,\n"
         # 9: website là Facebook -> bỏ website, vẫn nhận
         "Tiệm Y,Hàn Quốc,Danh bạ hội A (thử),https://example.org/danh-ba,Busan,,https://facebook.com/tiemy,,,\n"
+        # 10: link nguồn là Google Maps -> loại (không lưu tên/địa chỉ từ Google Maps vào CSDL riêng)
+        "Quán Google Maps,Hàn Quốc,Google Maps,https://www.google.com/maps/place/Quan+Viet/@37.3,126.7,17z,Ansan,,,,,\n"
+        # 11: link rút gọn của Google Maps -> loại
+        "Quán Goo.gl,Hàn Quốc,Google Maps,https://maps.app.goo.gl/AbCdEf123,Ansan,,,,,\n"
     )
     rows = read_csv_text(text)
-    assert len(rows) == 9 and rows[0]["ten"].startswith("CÔNG TY"), rows[0]
+    assert len(rows) == 11 and rows[0]["ten"].startswith("CÔNG TY"), rows[0]
     existing = [{c["name"]: "Dòng cũ", c["phone"]: "+65 6320 3880", c["region"]: "Singapore"}]
     accepted, rejected = process_rows(rows, cfg, existing)
     out = _strip_internal(accepted)
@@ -293,6 +298,8 @@ def self_test() -> int:
     assert c["website"] not in r5, "website Facebook phải bị bỏ"
     reasons = {r["ten"]: r["ly_do_loai"] for r in rejected}
     assert "mạng xã hội" in reasons["Quán Facebook"]
+    assert "Google Maps" in reasons["Quán Google Maps"] and "Google Maps" in reasons["Quán Goo.gl"], reasons
+    assert not _banned("https://example.org/google-maps-huong-dan", cfg["directory_import"]["banned_url_patterns"])
     assert "không nằm trong danh sách" in reasons["Cty X"]
     assert "trùng" in reasons["Công ty thử nghiệm Vietnam"]
     assert "link_nguon" in reasons["Cty Không Nguồn"]
@@ -332,8 +339,8 @@ def self_test() -> int:
         assert code == sc.EXIT_CONFIG and not sent, (code, sent)
         assert os.path.exists(os.path.join(tmp, "inbox", "dai.csv")), "file lỗi phải ở lại inbox"
 
-    print("self-test: OK (đọc CSV có dấu, chặn mạng xã hội, bỏ liên hệ chưa được công bố, bỏ email miễn phí, "
-          "bỏ website Facebook, chống trùng, nhãn A/C, luồng inbox, file quá dài)")
+    print("self-test: OK (đọc CSV có dấu, chặn mạng xã hội và Google Maps, bỏ liên hệ chưa được công bố, "
+          "bỏ email miễn phí, bỏ website Facebook, chống trùng, nhãn A/C, luồng inbox, file quá dài)")
     return 0
 
 

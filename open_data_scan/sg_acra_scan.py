@@ -351,8 +351,68 @@ def self_test() -> int:
     except sc.LarkError as exc:
         assert exc.written == 100, exc.written
 
+    # Lark trả HTTP 400 ở lô 2 (không phải code != 0): vẫn phải báo đã ghi 100 dòng
+    def flaky_http(method, url, headers, body, timeout):
+        if url.endswith("/tenant_access_token/internal"):
+            return 200, {"code": 0, "tenant_access_token": "t", "expire": 7200}
+        flaky_http.n += 1
+        if flaky_http.n == 1:
+            return 200, {"code": 0, "data": {}}
+        return 400, {"code": 99991663, "msg": "invalid request"}
+    flaky_http.n = 0
+    lk = sc.LarkBase("a", "b", "A", "T", transport=flaky_http, sleep=lambda s: None)
+    try:
+        lk.batch_create([{"x": 1}] * 150, chunk=100)
+        raise AssertionError("phải ném LarkError")
+    except sc.LarkError as exc:
+        assert exc.written == 100, exc.written
+
+    # Lark trả 403 (app chưa được thêm vào Base): là lỗi Lark (mã 4), KHÔNG phải "nguồn chặn" (mã 2)
+    def lark_forbidden(method, url, headers, body, timeout):
+        if url.endswith("/tenant_access_token/internal"):
+            return 200, {"code": 0, "tenant_access_token": "t", "expire": 7200}
+        return 403, {"code": 91403, "msg": "Forbidden"}
+    lk = sc.LarkBase("a", "b", "A", "T", transport=lark_forbidden, sleep=lambda s: None)
+    try:
+        lk.list_all()
+        raise AssertionError("phải ném LarkError")
+    except sc.BlockedError:
+        raise AssertionError("403 của Lark không được coi là nguồn chặn")
+    except sc.LarkError as exc:
+        assert "quyền" in str(exc), exc
+
+    # Lark trả HTML (không phải JSON) với HTTP 200: báo lỗi rõ thay vì AttributeError
+    def lark_html(method, url, headers, body, timeout):
+        if url.endswith("/tenant_access_token/internal"):
+            return 200, {"code": 0, "tenant_access_token": "t", "expire": 7200}
+        return 200, "<html>maintenance</html>"
+    lk = sc.LarkBase("a", "b", "A", "T", transport=lark_html, sleep=lambda s: None)
+    try:
+        lk.list_all()
+        raise AssertionError("phải ném LarkError")
+    except sc.LarkError as exc:
+        assert "JSON" in str(exc), exc
+
+    # Kết nối bị ngắt giữa chừng là lỗi mạng (ScanError), không phải lỗi cấu hình/file (OSError)
+    import urllib.request as _ur
+    _real_open = _ur.urlopen
+
+    def _reset(*a, **k):
+        raise ConnectionResetError(104, "Connection reset by peer")
+    _ur.urlopen = _reset
+    try:
+        sc.default_transport("GET", "https://example.invalid/x", {}, None, 5)
+        raise AssertionError("phải ném ScanError")
+    except sc.ScanError as exc:
+        assert "Lỗi mạng" in str(exc), exc
+    except OSError:
+        raise AssertionError("ConnectionResetError phải được bọc thành ScanError")
+    finally:
+        _ur.urlopen = _real_open
+
     print("self-test: OK (đọc 2 trang Lark, phân trang ACRA, chống trùng theo UEN và tên+địa chỉ, "
-          "loại cá thể và không hoạt động, nhãn A/B, giới hạn dòng, chế độ không ghi, 403/429, lỗi ghi giữa chừng)")
+          "loại cá thể và không hoạt động, nhãn A/B, giới hạn dòng, chế độ không ghi, 403/429, "
+          "lỗi ghi giữa chừng kể cả HTTP 4xx, 403 của Lark là lỗi quyền, Lark trả không phải JSON, lỗi mạng)")
     return 0
 
 

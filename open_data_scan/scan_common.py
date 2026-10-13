@@ -7,6 +7,7 @@ Không có khóa hay bí mật nào trong file này; khóa đọc từ biến m�
 """
 from __future__ import annotations
 
+import http.client
 import json
 import logging
 import os
@@ -72,6 +73,10 @@ def default_transport(method: str, url: str, headers: dict, body: Any, timeout: 
         raise ScanError(f"Không kết nối được tới {url}: {reason}") from exc
     except TimeoutError as exc:
         raise ScanError(f"Hết thời gian chờ khi gọi {url}") from exc
+    except (OSError, http.client.HTTPException) as exc:
+        # Kết nối bị ngắt giữa chừng (ConnectionResetError, RemoteDisconnected, IncompleteRead...):
+        # là lỗi mạng, không phải lỗi cấu hình hay file.
+        raise ScanError(f"Lỗi mạng khi gọi {url}: {type(exc).__name__}: {exc}") from exc
     text = raw.decode("utf-8", errors="replace")
     try:
         return status, json.loads(text)
@@ -167,10 +172,25 @@ class LarkBase:
         if auth:
             headers["Authorization"] = f"Bearer {self._token()}"
         # Lark là API của chính công ty: giới hạn tốc độ thì chờ rồi thử lại vài lần là bình thường.
-        return http_call(
-            self.transport, method, self.domain + path, headers, body,
-            retries_5xx=2, retries_429=3, wait_429=5.0, sleep=self.sleep,
-        )
+        try:
+            js = http_call(
+                self.transport, method, self.domain + path, headers, body,
+                retries_5xx=2, retries_429=3, wait_429=5.0, sleep=self.sleep,
+            )
+        except BlockedError as exc:
+            # 403/429 từ Lark là chuyện quyền ứng dụng hoặc hạn mức của chính công ty, KHÔNG phải
+            # "nguồn dữ liệu chặn": báo như lỗi Lark để IT sửa ngay, không chờ hôm sau chạy lại.
+            raise LarkError(
+                f"Lark từ chối ({exc}). Kiểm tra ứng dụng đã được thêm vào Base với quyền chỉnh sửa, "
+                "LARK_APP_ID/LARK_APP_SECRET đúng, và hạn mức API."
+            ) from exc
+        except LarkError:
+            raise
+        except ScanError as exc:  # HTTP 4xx/5xx hoặc lỗi mạng khi gọi Lark
+            raise LarkError(f"Lark lỗi: {exc}") from exc
+        if not isinstance(js, dict):
+            raise LarkError(f"Lark trả về nội dung không phải JSON: {str(js)[:200]}")
+        return js
 
     def _token(self) -> str:
         if self._tk and time.time() < self._exp - 60:
@@ -215,10 +235,18 @@ class LarkBase:
         written = 0
         for i in range(0, len(rows), chunk):
             part = rows[i:i + chunk]
-            js = self._call(
-                "POST", self._records_path() + "/batch_create",
-                {"records": [{"fields": r} for r in part]},
-            )
+            try:
+                js = self._call(
+                    "POST", self._records_path() + "/batch_create",
+                    {"records": [{"fields": r} for r in part]},
+                )
+            except LarkError as exc:
+                # Lỗi HTTP/mạng giữa chừng vẫn phải mang theo số dòng đã ghi, để script
+                # báo đúng "đã ghi một phần" (mã 3) thay vì "chưa ghi gì" (mã 4).
+                raise LarkError(
+                    f"Ghi lô {i // chunk + 1} lỗi: {exc} (đã ghi {written} dòng trước đó)",
+                    written=written,
+                ) from exc
             if js.get("code") != 0:
                 raise LarkError(
                     f"Ghi lô {i // chunk + 1} lỗi: {js.get('code')} {js.get('msg')} "

@@ -73,8 +73,10 @@
     "banned_url_patterns": [
       "facebook\\.com", "fb\\.com", "fb\\.me", "messenger\\.com",
       "linkedin\\.com", "instagram\\.com", "tiktok\\.com", "threads\\.net",
-      "twitter\\.com", "(^|[/.])x\\.com", "zalo\\.me", "t\\.me", "wa\\.me", "line\\.me", "kakao\\.com/(o|_)"
+      "twitter\\.com", "(^|[/.])x\\.com", "zalo\\.me", "t\\.me", "wa\\.me", "line\\.me", "kakao\\.com/(o|_)",
+      "google\\.[a-z.]+/maps", "maps\\.google\\.", "maps\\.app\\.goo\\.gl", "goo\\.gl/maps", "g\\.page/", "g\\.co/kgs"
     ],
+    "_ghi_chu_banned": "Mạng xã hội (không lấy liên hệ cá nhân) và Google Maps (điều khoản Google Maps Platform 3.2.3: không lưu tên/địa chỉ vào CSDL riêng).",
     "free_mail_domains": ["gmail.com", "googlemail.com", "yahoo.com", "ymail.com", "hotmail.com", "outlook.com", "live.com", "icloud.com", "naver.com", "daum.net", "hanmail.net", "kakao.com", "nate.com", "qq.com", "163.com"]
   }
 }

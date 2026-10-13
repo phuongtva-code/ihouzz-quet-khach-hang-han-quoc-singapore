@@ -111,7 +111,7 @@ Các cột:
 | `ten` | Có | Tên doanh nghiệp hoặc tổ chức đúng như trên trang nguồn |
 | `khu_vuc` | Có | `Hàn Quốc`, `Singapore` hoặc `Quận Cam` |
 | `nguon` | Có | Tên nguồn, ví dụ tên hội và loại danh bạ |
-| `link_nguon` | Có | Đường link tới trang công khai chứa thông tin. Không nhận mạng xã hội |
+| `link_nguon` | Có | Đường link tới trang công khai chứa thông tin. Không nhận mạng xã hội, không nhận Google Maps (script tự loại) |
 | `dia_chi`, `nganh` | Không | Không có `nganh` thì suy từ tên và ghi "(theo tên)" |
 | `dien_thoai`, `website`, `email` | Không | Chỉ nhận khi `lien_he_do_doanh_nghiep_cong_bo` = `co`. Website phải là website riêng của doanh nghiệp. Email miễn phí (gmail, naver...) luôn bị bỏ |
 | `lien_he_do_doanh_nghiep_cong_bo` | Có nếu có liên hệ | `co` nghĩa là chính doanh nghiệp hay tổ chức đã tự công bố liên hệ đó |
@@ -125,9 +125,9 @@ Mỗi file tối đa 200 dòng. Dòng vi phạm luật bị loại tự động:
 |---|---|---|
 | 0 | Ổn (có thể thêm 0 dòng nếu không còn gì mới) | Không |
 | 1 | Thiếu cấu hình, `.env` sai quyền, hoặc tự kiểm thất bại | Đọc dòng lỗi trong `logs/`, sửa `.env` hoặc báo lại |
-| 2 | Nguồn hoặc mạng công ty chặn (403) hoặc giới hạn tốc độ (429) | **Dừng và báo lại.** Không né. Chờ rồi chạy tay lại vào hôm sau |
-| 3 | Đã ghi một phần rồi lỗi | Mở Base xem các dòng mới nhất; lần chạy sau tự bỏ qua dòng đã có (chống trùng) |
-| 4 | Lark hoặc nguồn trả lỗi, chưa ghi gì | Xem thông điệp lỗi trong log. Lỗi nói tên cột không tìm thấy: so tên cột trong `scan_config.json` (mục `columns`) với tên cột trong Base. Lỗi không có quyền: kiểm bước 3.5 |
+| 2 | Nguồn dữ liệu (data.gov.sg) hoặc mạng công ty chặn (403) hoặc giới hạn tốc độ (429) | **Dừng và báo lại.** Không né. Chờ rồi chạy tay lại vào hôm sau |
+| 3 | Đã ghi một phần rồi lỗi (kể cả lỗi HTTP hay mất mạng giữa chừng) | Mở Base xem các dòng mới nhất; lần chạy sau tự bỏ qua dòng đã có (chống trùng) |
+| 4 | Lark hoặc nguồn trả lỗi, chưa ghi gì. **403/429 từ Lark cũng vào đây** (lỗi quyền ứng dụng hoặc hạn mức, không phải "nguồn chặn") | Xem thông điệp lỗi trong log. Lỗi nói tên cột không tìm thấy: so tên cột trong `scan_config.json` (mục `columns`) với tên cột trong Base. Lỗi "Lark từ chối": kiểm bước 3.5 (app đã được thêm vào Base với quyền chỉnh sửa) |
 
 ## 9. Giới hạn đã biết
 
