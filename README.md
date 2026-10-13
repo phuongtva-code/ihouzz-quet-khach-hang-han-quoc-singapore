@@ -38,7 +38,7 @@ Bản V19 gốc chạy trên claude.ai và dùng ba khả năng của nền tả
 - **Sao lưu / Khôi phục** (Màn 05, ô "Kho dữ liệu cục bộ"): tải cả kho ra file `.json` và nạp lại ở máy khác (gộp thêm hoặc thay thế toàn bộ). Đây là cách duy nhất để chia sẻ kho giữa các máy trong chế độ này. File sao lưu chứa dữ liệu nội bộ, không gửi ra ngoài.
 - "Máy xếp nhóm" (phân loại bằng Claude) không có ở đây: bài dán vào được gắn nhãn tạm bằng luật, cần người xem lại. Phân loại thật đã do script `reddit_ingest.py` làm trước khi xuất file.
 - Giới hạn: localStorage thường cho khoảng 5 MB (vài chục nghìn tín hiệu). Đầy thì trang báo "Kho đã đầy", cần Sao lưu rồi Xóa kho.
-- Nút "Reset giao diện demo" và Màn 08 dành cho bản thử giao diện: khi kho còn trống, nút chạy như cũ (lưu tóm tắt thao tác demo vào Màn 08 rồi đưa giao diện về dữ liệu mẫu); khi kho đã có dữ liệu thật, nút chỉ báo và chỉ sang "Xóa kho" ở Màn 05.
+- Nút "Reset giao diện demo" luôn đưa toàn bộ giao diện về trạng thái ban đầu (bộ lọc, dòng đã chọn, nhãn đã xác nhận, biểu mẫu, về Màn 00). Có thao tác demo trong phiên thì hỏi lưu tóm tắt vào Màn 08 trước; kho cục bộ đang có dữ liệu thì hỏi: OK = xóa kho về dữ liệu mẫu, Cancel = giữ dữ liệu, chỉ làm mới giao diện (muốn giữ thì "Sao lưu kho" ở Màn 05 trước).
 
 Khi kho còn trống, trang hiện dữ liệu mẫu với nhãn "Ví dụ · chưa có số thật" như trước. Muốn cả team dùng chung một kho và script tự đẩy dữ liệu lên, cần bước tiếp theo: Lark Base làm kho + một dịch vụ trung gian nhỏ (chưa làm).
 
