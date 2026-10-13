@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bản thử giao diện · quét cộng đồng người Việt tại Hàn</title>
+<meta name="description" content="Bản thử giao diện công cụ quét cộng đồng người Việt tại Hàn Quốc — iHouzz, dữ liệu mẫu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Geist+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="banner">
+  <span>Bản thử giao diện · iHouzz · quét cộng đồng người Việt tại Hàn Quốc</span>
+  <span class="dot" id="bn-note">● Số liệu trong đây là ví dụ — mọi số điện thoại đã che, tên viết tắt</span>
+</div>
+<div class="app paper" id="app">
+  <aside class="side">
+    <div class="brand">
+      <span aria-label="iHouzz"><svg style='height:24px;width:auto;display:block' xmlns="http://www.w3.org/2000/svg" viewBox="0 91 241.31 59" ><g fill="#2F6BFF"><path d="M86.31,100.46c.92,0,1.82,.26,2.61,.75l14.77,9.28c1.44,.9,2.29,2.45,2.29,4.15v20.01c0,2.7-2.2,4.9-4.9,4.9h-29.54c-2.7,0-4.9-2.2-4.9-4.9v-20.01c0-1.7,.86-3.25,2.29-4.15l14.77-9.28c.78-.49,1.68-.75,2.61-.75m0-9.28c-2.38,0-4.76,.66-6.86,1.98l-16.07,10.1c-3.75,2.36-6.03,6.48-6.03,10.91v21.78c0,7.12,5.77,12.89,12.89,12.89h32.14c7.12,0,12.89-5.77,12.89-12.89v-21.78c0-4.43-2.28-8.55-6.03-10.91l-16.07-10.1c-2.1-1.32-4.48-1.98-6.86-1.98"></path><path d="M74.09,122.16c-.8,0-1.42,.7-1.34,1.49,.74,6.79,6.5,12.08,13.49,12.08s12.74-5.28,13.49-12.07c.09-.8-.54-1.49-1.34-1.49h-5.4c-.65,0-1.19,.48-1.32,1.12-.52,2.52-2.75,4.42-5.43,4.42s-4.91-1.91-5.43-4.43c-.13-.64-.67-1.11-1.32-1.11h-5.4Z"></path><path d="M1.34,99.59h6.71c.71,0,1.28,.57,1.28,1.28v7.28H.05v-7.28c0-.71,.57-1.28,1.28-1.28Z"></path><path d="M42.05,147.5v-19.31H24.74v19.31c0,.68-.55,1.23-1.23,1.23H15.42v-49.1h8.09c.68,0,1.23,.55,1.23,1.23v18.27h17.32v-18.27c0-.68,.55-1.23,1.23-1.23h8.02v49.1h-8.02c-.68,0-1.23-.55-1.23-1.23Z"></path><path d="M132.06,148.55c-2.17-.85-4.08-2.07-5.72-3.67-1.6-1.65-2.83-3.56-3.67-5.72-.85-2.17-1.27-4.52-1.27-7.07v-32.44h8.08c.69,0,1.24,.56,1.24,1.24v31.34c0,2.68,.74,4.77,2.23,6.25,1.49,1.48,3.54,2.23,6.18,2.23s4.77-.74,6.25-2.23c1.49-1.48,2.23-3.57,2.23-6.25v-31.34c0-.69,.56-1.24,1.24-1.24h8.08v32.44c0,2.54-.43,4.9-1.27,7.07-.85,2.17-2.07,4.08-3.67,5.72-1.65,1.6-3.57,2.83-5.76,3.67s-4.56,1.27-7.1,1.27-4.9-.42-7.07-1.27"></path><path d="M173.12,148.73h25.94v-7.6c0-.68-.55-1.23-1.23-1.23h-24.79c-.68,0-1.23-.56-1.23-1.24,0-.36,.16-.69,.41-.92l.03-.02,22.63-19.78,1.13-1.2c3.91-3.91,3.91-10.25,0-14.15-1.83-1.83-4.18-2.8-6.57-2.92l-.39-.02h-26v7.6c0,.68,.55,1.23,1.23,1.23h24.63s.18,0,.18,0c.68,0,1.23,.55,1.23,1.23,0,.31-.12,.6-.31,.82l-.21,.19-22.56,19.72-.9,.83c-2.05,1.83-3.33,4.49-3.33,7.46,0,5.53,4.48,10.01,10.01,10.01h.12Z"></path><path d="M215.37,148.73h25.94v-7.6c0-.68-.55-1.23-1.23-1.23h-24.79c-.68,0-1.23-.56-1.23-1.24,0-.36,.16-.69,.41-.92l.03-.02,22.63-19.78,1.13-1.2c3.91-3.91,3.91-10.25,0-14.15-1.83-1.83-4.18-2.8-6.57-2.92l-.39-.02h-26v7.6c0,.68,.55,1.23,1.23,1.23h24.63s.18,0,.18,0c.68,0,1.23,.55,1.23,1.23,0,.31-.12,.6-.31,.82l-.21,.19-22.56,19.72-.9,.83c-2.05,1.83-3.33,4.49-3.33,7.46,0,5.53,4.48,10.01,10.01,10.01h.12Z"></path><rect y="111.88" width="9.25" height="36.85"></rect></g></svg></span>
+      <div class="sub">Quét cộng đồng · Hàn Quốc</div>
+    </div>
+    <nav class="navlist" aria-label="Màn hình">
+      <button data-s="s0" class="on"><b>00</b>Bắt đầu</button>
+      <button data-s="s1"><b>01</b>Tổng quan</button>
+      <button data-s="s2"><b>02</b>Bản đồ cộng đồng</button>
+      <button data-s="s3"><b>03</b>Cá nhân đồng ý</button>
+      <button data-s="s4"><b>04</b>Tín hiệu nhu cầu</button>
+      <button data-s="s5"><b>05</b>Nguồn &amp; lịch quét</button>
+      <button data-s="s6"><b>06</b>Biểu mẫu khảo sát</button>
+      <button data-s="s7"><b>07</b>Phân bố địa lý</button>
+    </nav>
+    <div class="foot">
+      <div class="co">[ 37.6°N · 127.0°E ]</div>
+      <div class="loc">Seoul · AI Team</div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- 00 CÁCH DÙNG -->
+    <section class="screen on" id="s0">
+      <div class="head">
+        <div><div class="sechead"><span class="num">00</span><span class="nm">Bắt đầu</span></div><h1 class="title">Bạn muốn làm gì?</h1></div>
+        <span class="st info">Bản thử · số liệu ví dụ</span>
+      </div>
+
+      <p class="body" style="max-width:760px">Công cụ gom sẵn thông tin công khai về cộng đồng người Việt tại Hàn Quốc. Chọn một việc bên dưới — bấm vào là tới ngay màn làm việc.</p>
+
+      <div class="row c2">
+        <button class="hcard" data-s="s4"><span class="t">Xem cộng đồng đang cần gì</span><span class="d">Tuần này mọi người quan tâm gì nhất: gửi tiền, nhà đất, việc làm… và ai đang hỏi.</span><span class="g">Mở →</span></button>
+        <button class="hcard" data-s="s2"><span class="t">Tìm &amp; lấy danh sách để liên hệ</span><span class="d">Tổ chức, doanh nghiệp, nhóm người Việt ở Hàn có liên hệ công khai. Lọc theo khu vực rồi xuất danh sách.</span><span class="g">Mở →</span></button>
+        <button class="hcard" data-s="s3"><span class="t">Xem người đã đồng ý cho liên hệ</span><span class="d">Danh sách người tự điền khảo sát và đồng ý, kèm họ quan tâm gì để nhắn đúng nội dung.</span><span class="g">Mở →</span></button>
+        <button class="hcard" data-s="s1"><span class="t">Xem báo cáo tổng quan</span><span class="d">Bức tranh chung tuần này: số đầu mối, người đồng ý, chủ đề nổi bật, phân bố khu vực.</span><span class="g">Mở →</span></button>
+      </div>
+
+      <div class="row c3">
+        <button class="hcard" data-s="s7"><span class="t">Bản đồ phân bố</span><span class="d">Người Việt ở đâu tại Hàn, quê ở đâu.</span><span class="g">Mở →</span></button>
+        <button class="hcard" data-s="s5"><span class="t">Nguồn &amp; lịch quét</span><span class="d">Cho người vận hành: nơi lấy thông tin, thêm nguồn.</span><span class="g">Mở →</span></button>
+        <button class="hcard" data-s="s6"><span class="t">Biểu mẫu khảo sát</span><span class="d">Mẫu để người Việt tự điền và đồng ý.</span><span class="g">Mở →</span></button>
+      </div>
+
+      <div class="alert"><div>
+        <p class="at">Vài điều cần biết</p>
+        <p class="ax" id="s0-note">Đây là <b>bản thử giao diện</b>, số liệu chỉ là ví dụ. Mọi liên hệ cá nhân chỉ với người <b>tự để lại thông tin và tự đồng ý</b> — không tự lấy số của ai từ bài đăng trong nhóm.</p>
+      </div></div>
+
+      <div class="ftr"><span class="m">00 · Bắt đầu · bản thử giao diện</span><span class="m">Bấm một thẻ để tới màn làm việc</span></div>
+    </section>
+
+    <!-- 01 TỔNG QUAN -->
+    <section class="screen" id="s1">
+      <div class="head">
+        <div><div class="sechead"><span class="num">01</span><span class="nm">Tổng quan · tuần 06–12.10</span></div><h1 class="title">Cộng đồng người Việt tại Hàn Quốc</h1></div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span class="st info" id="s1-badge">Dữ liệu mẫu</span><span class="label muted" id="s1-upd">Cập nhật 12.10.2026 · 08:00</span><button class="btn line sm">Xuất báo cáo tuần</button></div>
+      </div>
+      <div class="row c4" id="s1-kpis">
+        <div class="kpi"><span class="k">Đầu mối có liên hệ</span><span class="v">312</span><span class="d up">246 tổ chức · 66 cá nhân công khai · 184 đã xác minh</span></div>
+        <div class="kpi"><span class="k">Cá nhân đồng ý</span><span class="v">126</span><span class="d up">▲ 41 tuần này · 3 kênh</span></div>
+        <div class="kpi"><span class="k">Bài đã phân loại</span><span class="v">1.840</span><span class="d">Đang đọc mẫu 12/74 · chưa chốt tuần này</span></div>
+        <div class="kpi"><span class="k">Nguồn đang chạy</span><span class="v">9<small id="src-total">/ 15</small></span><span class="d down">! 1 lỗi · 1 trễ · 2 người làm tay · 2 chờ</span></div>
+      </div>
+      <div class="split3">
+        <div class="panel" id="s1-p-sig">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 class="sub">Tín hiệu nhu cầu tuần 41 · theo chủ đề</h2><span class="label muted">368 bài đã ẩn danh</span></div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="bar"><span>Tài chính, gửi tiền</span><div class="track"><div class="fill" style="width:31%"></div></div><span class="val">31% · 114</span></div>
+            <div class="bar"><span>Nhà đất tại VN</span><div class="track"><div class="fill hi" style="width:24%"></div></div><span class="val">24% · 88</span></div>
+            <div class="bar"><span>Việc làm, visa</span><div class="track"><div class="fill" style="width:17%"></div></div><span class="val">17% · 63</span></div>
+            <div class="bar"><span>Đời sống tại Hàn</span><div class="track"><div class="fill" style="width:12%"></div></div><span class="val">12% · 44</span></div>
+            <div class="bar"><span>Học tập</span><div class="track"><div class="fill" style="width:7%"></div></div><span class="val">7% · 26</span></div>
+            <div class="bar"><span>Về nước, định cư</span><div class="track"><div class="fill" style="width:5%"></div></div><span class="val">5% · 18</span></div>
+            <div class="bar"><span>Gia đình</span><div class="track"><div class="fill" style="width:4%"></div></div><span class="val">4% · 15</span></div>
+          </div>
+          <div class="legend"><span><i style="background:#2f6bff;opacity:.5"></i>Tỷ trọng trên 368 bài tuần này</span><span><i style="background:#2f6bff"></i>Chủ đề theo dõi riêng (đậm)</span></div>
+          <div class="foot"><span class="help">Chỉ tính bài của người dùng thật, đã loại quảng cáo và môi giới.</span><button class="btn prompt" data-s="s4">Xem từng bài</button></div>
+        </div>
+        <div class="panel" id="s1-p-steps">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 class="sub">Quy trình quét tuần này</h2><span class="label muted">03:00 hằng ngày</span></div>
+          <ul class="steps">
+            <li><i>01</i><div><b>Thu thập</b><span id="src-collect">15 nguồn · 412 bài mới</span></div><span class="st ok">Xong</span></li>
+            <li><i>02</i><div><b>Làm sạch, ẩn danh</b><span>44 bài loại · 0 số điện thoại sót</span></div><span class="st ok">Xong</span></li>
+            <li><i>03</i><div><b>Máy tự xếp nhóm</b><span>368 bài tuần này</span></div><span class="st ok">Xong</span></li>
+            <li><i>04</i><div><b>Kiểm tra mẫu</b><span>62/74 chờ đọc · chưa đủ mẫu để chốt</span></div><span class="st warn">Chờ đọc</span></li>
+            <li><i>05</i><div><b>Lưu vào hệ thống</b><span>5 bảng cập nhật 03:40</span></div><span class="st ok">Xong</span></li>
+            <li><i>06</i><div><b>Báo cáo tuần</b><span>Thứ Hai 08:00 · gửi qua Lark</span></div><span class="st info">Lên lịch</span></li>
+          </ul>
+          <div class="foot"><span class="help">Sai nhãn trên 15% thì chạy lại trước khi lưu.</span><button class="btn prompt" data-s="s5">Nguồn &amp; lịch</button></div>
+        </div>
+      </div>
+      <div class="split3">
+        <div class="panel" style="padding:0" id="s1-p-orgs">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding:24px 24px 0"><h2 class="sub">Nhóm, kênh mới phát hiện</h2><button class="btn prompt" data-s="s2">Bản đồ đầy đủ</button></div>
+          <div class="tablewrap" style="border:0">
+            <table class="tbl">
+              <thead><tr><th>Tên</th><th>Nền tảng</th><th class="num">Quy mô</th><th>Nhóm người</th><th>Khu vực</th><th>Mức</th></tr></thead>
+              <tbody>
+                <tr><td class="strong">Hội chị em Việt tại Gyeonggi</td><td>Facebook</td><td class="num">28.400</td><td>Kết hôn, lao động</td><td>Gyeonggi</td><td><span class="st info">B</span></td></tr>
+                <tr><td class="strong">Trung tâm hỗ trợ gia đình đa văn hóa Ansan</td><td>Website</td><td class="num">—</td><td>Kết hôn</td><td>Ansan</td><td><span class="st ok">A</span></td></tr>
+                <tr><td class="strong">Du học sinh Việt tại Daegu</td><td>Facebook</td><td class="num">9.700</td><td>Du học</td><td>Daegu</td><td><span class="st info">B</span></td></tr>
+                <tr><td class="strong">YouTube · đời sống cô dâu Việt</td><td>YouTube</td><td class="num">41.000</td><td>Kết hôn</td><td>—</td><td><span class="st info">B</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="padding:0 24px 20px"><span class="help"><b>A</b> = tổ chức công khai · <b>B</b> = cá nhân tự công khai nhận liên hệ. Xem đầy đủ ở màn Bản đồ cộng đồng.</span></div>
+        </div>
+        <div class="panel" id="s1-p-reg">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 class="sub">Phân bố theo khu vực tại Hàn</h2><span class="label muted">Kỳ 9.2026</span></div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="bar" style="grid-template-columns:120px 1fr 56px"><span>Gyeonggi</span><div class="track"><div class="fill" style="width:38%"></div></div><span class="val">38%</span></div>
+            <div class="bar" style="grid-template-columns:120px 1fr 56px"><span>Seoul</span><div class="track"><div class="fill" style="width:19%"></div></div><span class="val">19%</span></div>
+            <div class="bar" style="grid-template-columns:120px 1fr 56px"><span>Gyeongsang</span><div class="track"><div class="fill" style="width:14%"></div></div><span class="val">14%</span></div>
+            <div class="bar" style="grid-template-columns:120px 1fr 56px"><span>Chungcheong</span><div class="track"><div class="fill" style="width:9%"></div></div><span class="val">9%</span></div>
+            <div class="bar" style="grid-template-columns:120px 1fr 56px"><span>Incheon</span><div class="track"><div class="fill" style="width:7%"></div></div><span class="val">7%</span></div>
+            <div class="bar" style="grid-template-columns:120px 1fr 56px"><span>Khác</span><div class="track"><div class="fill alt" style="width:13%"></div></div><span class="val">13%</span></div>
+          </div>
+          <div class="foot"><span class="help">Thống kê tháng Bộ Tư pháp Hàn Quốc, tách riêng số nữ.</span><button class="btn prompt" data-s="s7">Bản đồ đầy đủ</button></div>
+        </div>
+      </div>
+      <div class="ftr"><span class="m">Công ty Cổ phần Công nghệ iHouzz · bản thử nghiệm</span><span class="m">Chỉ dữ liệu ẩn danh và đầu mối có đồng ý</span></div>
+    </section>
+
+    <!-- 02 BẢN ĐỒ CỘNG ĐỒNG -->
+    <section class="screen" id="s2">
+      <div class="head">
+        <div><div class="sechead"><span class="num">02</span><span class="nm">Bản đồ cộng đồng · có liên hệ</span></div><h1 class="title">Doanh nghiệp, tổ chức &amp; người công khai nhận liên hệ</h1></div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span class="st info" id="s2-badge">Dữ liệu mẫu</span><button class="btn line sm" id="s2-add">Thêm đầu mối</button><button class="btn accent sm" id="s2-export">Xuất danh sách đã xác minh</button></div>
+      </div>
+      <div class="chips" id="s2-chips">
+        <span class="chip"><b>312</b> đầu mối</span><span class="chip"><b>184</b> đã xác minh</span><span class="chip"><b>97</b> chờ xác minh</span>
+        <span class="chip"><b>31</b> không liên lạc được</span><span class="chip"><b>246</b> mức A · tổ chức</span><span class="chip"><b>66</b> mức B · cá nhân công khai</span>
+      </div>
+      <div class="alert"><div>
+        <p class="at">Cách đọc màn này</p>
+        <div class="exp">
+          <p>Đây là những nơi <b>gọi hoặc nhắn được</b>: tổ chức, doanh nghiệp, người tự công khai nhận liên hệ.</p>
+          <p><b>Mức A</b> = tổ chức &nbsp;·&nbsp; <b>Mức B</b> = cá nhân tự công khai.</p>
+          <p>Bấm vào một dòng để xem chi tiết ở khung bên phải.</p>
+        </div>
+      </div></div>
+      <div class="panel" style="gap:12px" id="s2-why">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 class="sub" style="font-size:16px">Vì sao từ nhiều nghìn dòng lại còn 312 đầu mối</h2><span class="label muted">lọc trùng và gộp trước khi xác minh</span></div>
+        <div style="display:grid;grid-template-columns:1fr 20px 1fr 20px 1fr;gap:8px;align-items:stretch">
+          <div style="border:2px solid var(--line);background:var(--surface-page);padding:14px;display:grid;gap:4px"><span class="label">Thu thập</span><span style="font:700 22px/1 var(--font-sans);color:var(--text-primary)">nhiều nghìn</span><span class="help">dòng dữ liệu thô từ bản đồ, tìm kiếm, website, danh sách công khai</span></div>
+          <div style="display:flex;align-items:center;justify-content:center;color:#7a8bc6;font-family:var(--font-mono)">→</div>
+          <div style="border:2px solid var(--line);background:var(--surface-page);padding:14px;display:grid;gap:4px"><span class="label">Lọc trùng, gộp</span><span style="font:700 22px/1 var(--font-sans);color:var(--text-primary)">312</span><span class="help">đầu mối riêng biệt sau khi gộp các dòng trùng</span></div>
+          <div style="display:flex;align-items:center;justify-content:center;color:#7a8bc6;font-family:var(--font-mono)">→</div>
+          <div style="border:2px solid var(--line);background:var(--surface-page);padding:14px;display:grid;gap:4px"><span class="label">Xác minh</span><span style="font:700 22px/1 var(--font-sans);color:var(--text-primary)">184</span><span class="help">đầu mối đã gọi hoặc kiểm tra còn hoạt động</span></div>
+        </div>
+      </div>
+      <div class="filters" id="s2-filters" style="grid-template-columns:repeat(6,minmax(0,1fr)) auto">
+        <label class="field"><span class="label">Loại</span><select class="select" data-f="loai"><option>Tất cả</option><option>Hội đoàn</option><option>Doanh nghiệp Việt tại Hàn</option><option>Tổ chức phía Việt Nam</option><option>Nhóm, kênh</option><option>Cá nhân công khai</option></select></label>
+        <label class="field"><span class="label">Tỉnh / thành</span><select class="select" data-f="kv"><option>Tất cả</option><option>Seoul</option><option>Busan</option><option>Incheon</option><option>Daegu</option><option>Daejeon</option><option>Gwangju</option><option>Ulsan</option><option>Sejong</option><option>Gyeonggi</option><option>Gangwon</option><option>Chungcheong Bắc</option><option>Chungcheong Nam</option><option>Jeolla Bắc</option><option>Jeolla Nam</option><option>Gyeongsang Bắc</option><option>Gyeongsang Nam</option><option>Jeju</option></select></label>
+        <label class="field"><span class="label">Khu vực nhỏ</span><select class="select" data-f="kvn"><option>Tất cả</option><option>Ansan</option><option>Hwaseong</option><option>Suwon</option><option>Siheung</option><option>Bucheon</option><option>Pyeongtaek</option><option>Gimhae</option><option>Asan</option><option>Cheonan</option><option>Gumi</option><option>Guro (Seoul)</option><option>Khác</option></select></label>
+        <label class="field"><span class="label">Mức</span><select class="select" data-f="muc"><option>A và B</option><option>A · tổ chức</option><option>B · cá nhân công khai</option></select></label>
+        <label class="field"><span class="label">Xác minh</span><select class="select" data-f="xm"><option>Tất cả</option><option>Đã xác minh</option><option>Chờ xác minh</option><option>Không liên lạc được</option></select></label>
+        <label class="field"><span class="label">Tìm</span><input class="input" type="search" placeholder="Tên, khu vực, nguồn"></label>
+        <button class="btn line">Lọc</button>
+      </div>
+      <div style="display:flex;justify-content:flex-start;margin:-6px 0 2px">
+        <details class="colpick">
+          <summary class="btn line sm">+ Chọn cột hiển thị</summary>
+          <div class="colmenu" id="s2-colmenu">
+            <span class="help">Bật thêm cột đầu mối (giá trị che sẵn · xem đầy đủ ở khung chi tiết):</span>
+            <label><input type="checkbox" data-col="dt"> Số điện thoại</label>
+            <label><input type="checkbox" data-col="email"> Email</label>
+            <label><input type="checkbox" data-col="web"> Website</label>
+            <label><input type="checkbox" data-col="fb"> Facebook</label>
+            <label><input type="checkbox" data-col="zalo"> Zalo</label>
+            <label><input type="checkbox" data-col="yt"> YouTube/TikTok</label>
+            <label><input type="checkbox" data-col="addr"> Địa chỉ</label>
+            <label><input type="checkbox" data-col="src"> Nguồn gốc</label>
+          </div>
+        </details>
+      </div>
+      <div class="split">
+        <div class="tablewrap">
+          <table class="tbl">
+            <thead><tr><th>Mã</th><th>Tên</th><th>Loại</th><th>Khu vực</th><th>Kênh liên hệ</th><th>Nguồn</th><th>Mức</th><th>Xác minh</th></tr></thead>
+            <tbody id="s2-rows">
+              <tr data-email="lienhe@nguoiviet-hq.org" data-web="nguoiviethanquoc.org" data-src="Website chính thức"><td class="id">ORG-0001</td><td class="strong">Hội người Việt Nam tại Hàn Quốc</td><td>Hội đoàn</td><td>Seoul</td><td class="id s2-kenh"></td><td>Website</td><td><span class="st ok">A</span></td><td><span class="st ok">Đã xác minh</span></td></tr>
+              <tr class="sel" data-dt="+82 31-215-8600" data-email="ansan@damvanhoa.kr" data-web="ansanmfsc.kr" data-src="Website chính thức"><td class="id">ORG-0042</td><td class="strong">Trung tâm hỗ trợ gia đình đa văn hóa Ansan</td><td>Hội đoàn</td><td>Gyeonggi · Ansan</td><td class="id s2-kenh"></td><td>Website</td><td><span class="st ok">A</span></td><td><span class="st ok">Đã xác minh</span></td></tr>
+              <tr data-dt="+82 31-492-7733" data-fb="fb.com/sieuthiviet.wongok" data-addr="123 Wongok-dong, Ansan" data-src="Naver Map"><td class="id">BIZ-0117</td><td class="strong">Siêu thị thực phẩm Việt · Wongok</td><td>Doanh nghiệp</td><td>Gyeonggi · Ansan</td><td class="id s2-kenh"></td><td>Naver Map</td><td><span class="st ok">A</span></td><td><span class="st warn">Chờ xác minh</span></td></tr>
+              <tr data-dt="+82 2-3159-4210" data-zalo="zalo.me/ihouzz-guro" data-addr="55 Guro-gu, Seoul" data-src="Google Places"><td class="id">BIZ-0098</td><td class="strong">Dịch vụ chuyển tiền về VN · Guro</td><td>Doanh nghiệp</td><td>Seoul · Guro</td><td class="id s2-kenh"></td><td>Google Places</td><td><span class="st ok">A</span></td><td><span class="st ok">Đã xác minh</span></td></tr>
+              <tr data-dt="+84 24-3825-1900" data-email="info@xkld-vn.com.vn" data-web="xkld-vn.com.vn" data-src="Danh sách cơ quan VN (DOLAB)"><td class="id">VNO-0021</td><td class="strong">Công ty xuất khẩu lao động (có giấy phép)</td><td>Tổ chức phía VN</td><td>Hà Nội</td><td class="id s2-kenh"></td><td>Danh sách cơ quan VN</td><td><span class="st ok">A</span></td><td><span class="st ok">Đã xác minh</span></td></tr>
+              <tr data-fb="fb.com/groups/chiemviet-gyeonggi" data-src="Facebook · trang nhóm công khai"><td class="id">GRP-0063</td><td class="strong">Hội chị em Việt tại Gyeonggi · quản trị viên</td><td>Nhóm Facebook</td><td>Gyeonggi</td><td class="id s2-kenh"></td><td>Facebook</td><td><span class="st info">B</span></td><td><span class="st warn">Chờ xác minh</span></td></tr>
+              <tr data-email="hoptac@doisongcodauviet.com" data-yt="youtube.com/@doisongcodauviet" data-src="YouTube"><td class="id">KOL-0009</td><td class="strong">YouTube · đời sống cô dâu Việt</td><td>Cá nhân công khai</td><td>—</td><td class="id s2-kenh"></td><td>YouTube</td><td><span class="st info">B</span></td><td><span class="st ok">Đã xác minh</span></td></tr>
+              <tr data-dt="+82 10-2957-4821" data-zalo="zalo.me/nailsuwon88" data-fb="fb.com/nailsuwon" data-addr="Jungang-ro, Suwon" data-src="Facebook"><td class="id">BIZ-0140</td><td class="strong">Tiệm nail · chủ người Việt · Suwon</td><td>Cá nhân công khai</td><td>Gyeonggi · Suwon</td><td class="id s2-kenh"></td><td>Facebook</td><td><span class="st info">B</span></td><td><span class="st warn">Chờ xác minh</span></td></tr>
+            </tbody>
+          </table>
+          <div class="tblfoot"><span class="help" id="s2-count">Hiện 8 trong 312 · số điện thoại che một phần trên màn hình danh sách</span><div style="display:flex;gap:8px"><button class="btn line sm" disabled>Trước</button><button class="btn line sm">Sau</button></div></div>
+        </div>
+        <aside class="panel">
+          <div style="display:grid;gap:6px"><span class="label" id="s2-d-code">ORG-0042 · mức A</span><h2 class="sub" id="s2-d-name">Trung tâm hỗ trợ gia đình đa văn hóa Ansan</h2><span class="st ok" id="s2-d-status">Đã xác minh</span></div>
+          <span class="help">Bấm một dòng trong bảng để xem đầu mối tương ứng.</span>
+          <dl class="specs">
+            <dt>Loại</dt><dd id="s2-d-loai">Hội đoàn</dd>
+            <dt>Khu vực</dt><dd id="s2-d-area">Ansan</dd>
+            <dt>Nguồn</dt><dd id="s2-d-nguon">Website</dd>
+            <dt>Dùng cho</dt><dd>Phát khảo sát tự nguyện, đặt lịch</dd>
+          </dl>
+          <div style="display:grid;gap:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><span class="label">Kênh liên hệ</span><button class="btn line sm" type="button" id="s2-ch-toggle">Hiện tất cả</button></div>
+            <div id="s2-d-channels"></div>
+            <span class="help">Tự ẩn kênh trống. Số nhạy cảm che sẵn, bấm "Hiện" mới rõ (có ghi nhật ký).</span>
+          </div>
+          <div style="display:grid;gap:8px">
+            <span class="label">Tiêu chí xác minh</span>
+            <ul class="vcheck" id="s2-vcheck"></ul>
+            <span class="help">"Đã xác minh" = đạt cả 4 · tự hết hạn sau 6 tháng để xác minh lại.</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap" id="s2-actions"><button class="btn line sm">Sửa</button><button class="btn line sm">Ghi chú</button><button class="btn danger sm">Không dùng</button></div>
+        </aside>
+      </div>
+      <div class="ftr"><span class="m">Mức A: thông tin tổ chức công bố để được liên hệ · Mức B: cá nhân tự đăng nhận liên hệ công việc</span><span class="m">Không ghi số điện thoại cá nhân từ bài đăng trong nhóm</span></div>
+    </section>
+
+    <!-- 03 CÁ NHÂN ĐỒNG Ý -->
+    <section class="screen" id="s3">
+      <div class="head">
+        <div><div class="sechead"><span class="num">03</span><span class="nm">Cá nhân đồng ý nhận liên hệ · người tự điền</span></div><h1 class="title">Người tự để lại thông tin qua kênh đồng ý</h1></div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span class="st info">Dữ liệu mẫu</span><span class="label muted">Xem với tư cách AI Team · 1/3 người có quyền</span></div>
+      </div>
+      <div class="alert warn"><div><p class="at">Bảng hạn chế truy cập · không xuất file · mỗi lần hiện số được ghi lại</p><p class="ax">Chỉ dùng để liên hệ đúng nội dung người điền đã đồng ý. Người nhắn "DỪNG" chuyển sang Rút lại trong 24 giờ và không hiện số nữa.</p></div><button class="btn line sm" data-act="s3log">Nhật ký truy cập</button></div>
+      <div class="row c4">
+        <div class="kpi"><span class="k">Đã đồng ý</span><span class="v">126</span><span class="d up">▲ 41 tuần này</span></div>
+        <div class="kpi"><span class="k">Nữ giới</span><span class="v">117<small>93%</small></span><span class="d">Biểu mẫu nhắm nữ · 9 tự chọn khác</span></div>
+        <div class="kpi"><span class="k">Chi phí mỗi liên hệ</span><span class="v">[—]<small>₩</small></span><span class="d">Chốt sau 2 tuần chạy thử</span></div>
+        <div class="kpi"><span class="k">Rút lại</span><span class="v">2</span><span class="d">Nhắn DỪNG · đã khóa số</span></div>
+      </div>
+      <div class="row c3">
+        <div class="panel"><h2 class="sub" style="font-size:16px">Theo kênh đồng ý</h2>
+          <div class="bar" style="grid-template-columns:130px 1fr 44px"><span>Biểu mẫu Facebook</span><div class="track"><div class="fill" style="width:67%"></div></div><span class="val">84</span></div>
+          <div class="bar" style="grid-template-columns:130px 1fr 44px"><span>Khảo sát hội đoàn</span><div class="track"><div class="fill" style="width:23%"></div></div><span class="val">29</span></div>
+          <div class="bar" style="grid-template-columns:130px 1fr 44px"><span>Zalo chính thức</span><div class="track"><div class="fill" style="width:10%"></div></div><span class="val">13</span></div>
+        </div>
+        <div class="panel"><h2 class="sub" style="font-size:16px">Theo nhóm</h2>
+          <div class="bar" style="grid-template-columns:130px 1fr 44px"><span>Kết hôn, định cư</span><div class="track"><div class="fill" style="width:44%"></div></div><span class="val">55</span></div>
+          <div class="bar" style="grid-template-columns:130px 1fr 44px"><span>Lao động</span><div class="track"><div class="fill" style="width:29%"></div></div><span class="val">37</span></div>
+          <div class="bar" style="grid-template-columns:130px 1fr 44px"><span>Du học</span><div class="track"><div class="fill" style="width:18%"></div></div><span class="val">23</span></div>
+          <div class="bar" style="grid-template-columns:130px 1fr 44px"><span>Khác</span><div class="track"><div class="fill alt" style="width:9%"></div></div><span class="val">11</span></div>
+        </div>
+        <div class="panel"><h2 class="sub" style="font-size:16px">Mối quan tâm</h2>
+          <div class="bar" style="grid-template-columns:130px 1fr 44px"><span>Gửi tiền về</span><div class="track"><div class="fill" style="width:58%"></div></div><span class="val">73</span></div>
+          <div class="bar" style="grid-template-columns:130px 1fr 44px"><span>Mua nhà, đất VN</span><div class="track"><div class="fill" style="width:41%"></div></div><span class="val">52</span></div>
+          <div class="bar" style="grid-template-columns:130px 1fr 44px"><span>Xây nhà bố mẹ</span><div class="track"><div class="fill" style="width:30%"></div></div><span class="val">38</span></div>
+          <div class="bar" style="grid-template-columns:130px 1fr 44px"><span>Về nước lập nghiệp</span><div class="track"><div class="fill" style="width:21%"></div></div><span class="val">26</span></div>
+        </div>
+      </div>
+      <div class="tablewrap">
+        <table class="tbl">
+          <thead><tr><th>Mã</th><th>Tên gọi</th><th>Tuổi</th><th>Ở tại Hàn</th><th>Quê</th><th>Nhóm</th><th>Quan tâm nhất</th><th>Kênh</th><th>Số liên hệ</th><th>Trạng thái</th></tr></thead>
+          <tbody>
+            <tr><td class="id">CN-0126</td><td class="strong">Nguyễn T. H.</td><td class="num">31</td><td>Hwaseong</td><td>Hải Dương</td><td>Kết hôn</td><td>Xây nhà bố mẹ</td><td>Biểu mẫu FB</td><td class="id">010-••••-4821 <button class="reveal" data-id="CN-0126" data-full="010-2957-4821">hiện</button></td><td><span class="st ok">Đang đồng ý</span></td></tr>
+            <tr><td class="id">CN-0125</td><td class="strong">Trần M. L.</td><td class="num">24</td><td>Daegu</td><td>Nghệ An</td><td>Du học</td><td>Gửi tiền về</td><td>Biểu mẫu FB</td><td class="id">010-••••-0973 <button class="reveal" data-id="CN-0125" data-full="010-3360-0973">hiện</button></td><td><span class="st ok">Đang đồng ý</span></td></tr>
+            <tr><td class="id">CN-0124</td><td class="strong">Lê T. N.</td><td class="num">38</td><td>Ansan</td><td>Cần Thơ</td><td>Kết hôn</td><td>Mua nhà, đất VN</td><td>Hội đoàn</td><td class="id">Zalo ••••••88 <button class="reveal" data-id="CN-0124" data-full="Zalo lethin1988">hiện</button></td><td><span class="st ok">Đang đồng ý</span></td></tr>
+            <tr><td class="id">CN-0123</td><td class="strong">Phạm T. Q.</td><td class="num">27</td><td>Gimhae</td><td>Thanh Hóa</td><td>Lao động</td><td>Gửi tiền về</td><td>Zalo chính thức</td><td class="id">Zalo ••••••21 <button class="reveal" data-id="CN-0123" data-full="Zalo phamquynh21">hiện</button></td><td><span class="st ok">Đang đồng ý</span></td></tr>
+            <tr><td class="id">CN-0122</td><td class="strong">Hoàng T. V.</td><td class="num">42</td><td>Incheon</td><td>Hà Tĩnh</td><td>Kết hôn</td><td>Về nước lập nghiệp</td><td>Biểu mẫu FB</td><td class="id">010-••••-•••• </td><td><span class="st bad">Rút lại</span></td></tr>
+          </tbody>
+        </table>
+        <div class="tblfoot"><span class="help">Hiện 5 trong 126 · tên viết tắt, số che; "hiện" mở số 60 giây và ghi nhật ký</span><div style="display:flex;gap:8px"><button class="btn line sm" disabled>Trước</button><button class="btn line sm">Sau</button></div></div>
+      </div>
+      <div class="panel"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 class="sub" style="font-size:16px">Nhật ký truy cập · 7 ngày</h2><span class="label muted">Tự động, không sửa được</span></div>
+        <ul class="log" id="s3-log">
+          <li><i>12.10 08:02</i><i>AI Team · Phương</i><span>Mở bảng · lọc nhóm Kết hôn</span></li>
+          <li><i>11.10 16:40</i><i>Marketing</i><span>Hiện số CN-0119 · lý do: xác nhận khảo sát</span></li>
+          <li><i>11.10 09:50</i><i>Hệ thống</i><span>CN-0122 nhắn DỪNG · chuyển Rút lại, khóa số</span></li>
+          <li><i>10.10 10:15</i><i>Pháp chế</i><span>Duyệt mẫu 50 dòng · không có dữ liệu ngoài phạm vi đồng ý</span></li>
+        </ul>
+      </div>
+      <div class="ftr"><span class="m">Người tự để lại thông tin và đồng ý nhận liên hệ · biểu mẫu nêu rõ mục đích và cách rút lại</span><span class="m">Lưu riêng trong hệ thống (Lark)</span></div>
+    </section>
+
+    <!-- 04 TÍN HIỆU NHU CẦU -->
+    <section class="screen" id="s4">
+      <div class="head">
+        <div><div class="sechead"><span class="num">04</span><span class="nm">Tín hiệu nhu cầu · bài công khai đã ẩn danh</span></div><h1 class="title">Cộng đồng đang nói về điều gì</h1></div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span class="st info" id="s4-badge">Dữ liệu mẫu</span><span class="label muted" id="s4-week">Tuần 41 · 06–12.10</span></div>
+      </div>
+      <div class="alert"><div>
+        <p class="at">Số liệu này ở đâu ra?</p>
+        <div class="flow">
+          <div class="step"><b>1 · Lấy bài</b><span>Bài đăng công khai trên Facebook, TikTok, Reddit…</span></div>
+          <div class="step"><b>2 · Ẩn danh</b><span>Xóa tên, số điện thoại, đường link</span></div>
+          <div class="step"><b>3 · Máy xếp nhóm</b><span>Đọc nội dung, xếp vào chủ đề</span></div>
+          <div class="step"><b>4 · Lên bảng</b><span>Thành số liệu bạn đang xem</span></div>
+        </div>
+        <p class="ax" style="margin-top:10px" id="s4-note">Chỉ lấy nội dung bài, <b>không lấy thông tin người</b>. Muốn có số, trước hết phải <b>thêm/bật nguồn ở Màn 05 (Nguồn &amp; lịch)</b> rồi agent mới quét — chưa có nguồn thì chưa có số. Số đang hiển thị là ví dụ.</p>
+      </div><button class="btn line sm" data-s="s5">Mở Nguồn &amp; lịch</button></div>
+      <div class="split3">
+        <div class="panel" id="s4-p1">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 class="sub">Chủ đề · tuần 41 so với tuần 40</h2><span class="label muted">368 bài</span></div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="bar"><span>Tài chính, gửi tiền</span><div class="track"><div class="fill" style="width:31%"></div></div><span class="val">31% ▲3</span></div>
+            <div class="bar"><span>Nhà đất tại VN</span><div class="track"><div class="fill hi" style="width:24%"></div></div><span class="val">24% ▲6</span></div>
+            <div class="bar"><span>Việc làm, visa</span><div class="track"><div class="fill" style="width:17%"></div></div><span class="val">17% ▼2</span></div>
+            <div class="bar"><span>Đời sống tại Hàn</span><div class="track"><div class="fill" style="width:12%"></div></div><span class="val">12% —</span></div>
+            <div class="bar"><span>Học tập</span><div class="track"><div class="fill" style="width:7%"></div></div><span class="val">7% ▼1</span></div>
+            <div class="bar"><span>Về nước, định cư</span><div class="track"><div class="fill" style="width:5%"></div></div><span class="val">5% ▼4</span></div>
+            <div class="bar"><span>Gia đình</span><div class="track"><div class="fill" style="width:4%"></div></div><span class="val">4% —</span></div>
+          </div>
+          <div class="foot"><span class="help">Nhà đất tại VN tăng 6 điểm, phần lớn từ nhóm chị em kết hôn ở Gyeonggi hỏi mua đất cho bố mẹ.</span></div>
+        </div>
+        <div class="panel" id="s4-p2">
+          <h2 class="sub">Nhà đất tại VN · ai hỏi, hỏi gì</h2>
+          <table class="tbl" style="border:0"><thead><tr><th>Nhóm người đăng</th><th class="num">Bài</th><th>Mức cụ thể</th></tr></thead>
+            <tbody>
+              <tr><td>Kết hôn, định cư</td><td class="num">39</td><td>Có địa điểm · ngân sách</td></tr>
+              <tr><td>Lao động</td><td class="num">27</td><td>Hỏi chung · ngân sách</td></tr>
+              <tr><td>Du học sinh</td><td class="num">12</td><td>Hỏi chung</td></tr>
+              <tr><td>Chuyên gia</td><td class="num">6</td><td>Có địa điểm · thời điểm</td></tr>
+              <tr><td>Không rõ</td><td class="num">4</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="split">
+        <div style="display:flex;flex-direction:column;gap:12px" id="s4-list">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 class="sub">Từng bài · lọc: Nhà đất tại VN</h2><span class="label muted">Tóm tắt đã diễn giải · bỏ tên, đường link, số điện thoại, chi tiết nhận dạng</span></div>
+          <div class="panel"><p class="body">Người dùng muốn mua một mảnh đất nhỏ ở quê cho bố mẹ, đã có tiền gửi về, lo khâu kiểm tra giấy tờ và sợ bị lừa. <span class="help">(tóm tắt đã diễn giải, không lưu nguyên văn)</span></p>
+            <div class="chips"><span class="chip"><b>Chủ đề</b> Nhà đất tại VN</span><span class="chip"><b>Nhu cầu</b> Có</span><span class="chip"><b>Cụ thể</b> Có ngân sách</span><span class="chip"><b>Quê</b> Miền Bắc</span><span class="chip"><b>Ở Hàn</b> Gyeonggi</span><span class="chip"><b>Nhóm</b> Kết hôn</span></div>
+            <div class="foot"><span class="help">Nhóm Facebook · hội chị em Gyeonggi · 11.10</span><div style="display:flex;gap:8px"><button class="btn line sm" data-act="confirmlabel">Đúng nhãn</button><button class="btn line sm">Sửa nhãn</button></div></div>
+          </div>
+          <div class="panel"><p class="body">Người dùng dự định về nước và đang phân vân giữa mua chung cư ở thành phố hay xây nhà ở quê, muốn hỏi kinh nghiệm người đã về. <span class="help">(tóm tắt đã diễn giải, không lưu nguyên văn)</span></p>
+            <div class="chips"><span class="chip"><b>Chủ đề</b> Nhà đất tại VN</span><span class="chip"><b>Nhu cầu</b> Có</span><span class="chip"><b>Cụ thể</b> Có thời điểm</span><span class="chip"><b>Ở Hàn</b> Gyeongsang</span><span class="chip"><b>Nhóm</b> Lao động</span><span class="chip"><b>Sắc thái</b> Trung tính</span></div>
+            <div class="foot"><span class="help">Nhóm Facebook · nhóm lao động · 10.10</span><div style="display:flex;gap:8px"><button class="btn line sm" data-act="confirmlabel">Đúng nhãn</button><button class="btn line sm">Sửa nhãn</button></div></div>
+          </div>
+          <div class="panel"><p class="body">"Bán đất nền giá tốt, sổ đỏ chính chủ, ib em tư vấn ạ."</p>
+            <div class="chips"><span class="chip"><b>Chủ đề</b> Nhà đất tại VN</span><span class="chip"><b>Nhu cầu</b> Không · quảng cáo</span><span class="chip"><b>Loại khỏi thống kê</b> Có</span></div>
+            <div class="foot"><span class="help">Nhóm Facebook · chợ Việt Hàn · 11.10</span><div style="display:flex;gap:8px"><button class="btn line sm" data-act="confirmlabel">Đúng nhãn</button><button class="btn line sm">Sửa nhãn</button></div></div>
+          </div>
+        </div>
+        <aside class="panel accent" id="s4-aside">
+          <div style="display:grid;gap:6px"><span class="label">Kiểm tra mẫu · tuần 41</span><h2 class="sub">62 bài chờ người đọc</h2><p class="body" style="font-size:14px">20% bài mỗi tuần được đọc lại. Đúng từ 85% trở lên thì tuần này được lưu; thấp hơn thì chỉnh tiêu chí và chạy lại.</p></div>
+          <div class="row c2">
+            <div class="kpi" style="padding:16px"><span class="k">Đã đọc</span><span class="v" style="font-size:28px">12<small>/ 74</small></span></div>
+            <div class="kpi" style="padding:16px"><span class="k">Đúng</span><span class="v" style="font-size:28px">88%</span><span class="d up">✓ trên ngưỡng 85%</span></div>
+          </div>
+          <div><span class="label">Sai hay gặp</span>
+            <ul class="steps" style="margin-top:8px"><li><i>01</i><div><b style="font-size:14px">Lẫn tiếng Hàn</b><span>"월세" (thuê trả hằng tháng), "전세" (thuê đặt cọc lớn) chưa có trong từ điển</span></div></li><li><i>02</i><div><b style="font-size:14px">Nhóm người đăng</b><span>Suy ra sai giữa lao động và kết hôn</span></div></li></ul>
+          </div>
+          <button class="btn accent" style="justify-content:center">Bắt đầu đọc 62 bài</button>
+          <span class="help">Người đọc: nhân sự hiểu cộng đồng · mỗi bài ~20 giây</span>
+        </aside>
+      </div>
+      <div class="ftr"><span class="m">Lưu bản tóm tắt diễn giải, gộp quê/nơi ở về vùng, gộp nhóm để không nhận ra từng người trước khi lưu</span><span class="m">Từ điển cộng đồng: 214 từ</span></div>
+    </section>
+
+    <!-- 05 NGUỒN & LỊCH QUÉT -->
+    <section class="screen" id="s5">
+      <div class="head">
+        <div><div class="sechead"><span class="num">05</span><span class="nm" id="src-head">Nguồn &amp; lịch · 15 nguồn, 3 nhóm</span></div><h1 class="title">Lấy thông tin ở đâu, chạy lúc nào, được gì</h1></div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span class="st info" id="s5-badge">Dữ liệu mẫu</span><button class="btn line sm" data-act="addsrc">Thêm nguồn</button><button class="btn accent sm" id="s5-rerun">Chạy lại nguồn lỗi</button></div>
+      </div>
+      <div class="alert"><div>
+        <p class="at">Cách đọc màn này</p>
+        <div class="exp">
+          <p>Mỗi dòng là một chỗ hệ thống lấy thông tin, chia làm 3 nhóm:</p>
+          <p><b>① Lấy được liên hệ</b> — gọi hoặc nhắn được.</p>
+          <p><b>② Đếm quy mô</b> — bao nhiêu người, ở đâu.</p>
+          <p><b>③ Nghe ngóng nhu cầu</b> — cộng đồng đang quan tâm gì.</p>
+          <p id="s5-howto-last">Nút <b>“Thêm nguồn”</b> chỉ thêm một dòng để cùng xem — chưa chạy thật.</p>
+        </div>
+      </div></div>
+      <div class="panel">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 class="sub" id="s5-proc-h">6 bước · chạy lúc 3 giờ sáng mỗi ngày, báo cáo thứ Hai</h2><span class="label muted" id="s5-proc-l">Tự động · lưu vào hệ thống Lark</span></div>
+        <div class="proc">
+          <div class="st-box"><i>01</i><b>Thu thập</b><span>Lấy tự động, tải file, bài người dán vào</span></div>
+          <div class="st-box mark"><i>02</i><b>Làm sạch, ẩn danh</b><span>Bỏ tên, đường link, số điện thoại; lọc trùng và quảng cáo</span></div>
+          <div class="st-box"><i>03</i><b>Máy tự xếp nhóm</b><span>Sắp bài vào 9 mục theo tiêu chí</span></div>
+          <div class="st-box"><i>04</i><b>Người kiểm tra lại</b><span>Đọc lại 20% số bài · đạt từ 85% trở lên</span></div>
+          <div class="st-box"><i>05</i><b>Lưu vào hệ thống</b><span>Chỉ giữ dữ liệu ẩn danh &amp; có đồng ý</span></div>
+          <div class="st-box"><i>06</i><b>Gửi báo cáo tuần</b><span>Tự gửi Ban giám đốc qua Lark</span></div>
+        </div>
+      </div>
+      <div id="s5-real" style="display:none;gap:16px" data-real-zone>
+        <div id="s5-real-tbl" class="tablewrap">
+          <table class="tbl">
+            <thead><tr><th>Nhóm</th><th>Nguồn</th><th>Cách nạp</th><th class="num">Số dòng</th><th>Lần nạp cuối</th><th>Trạng thái</th><th></th></tr></thead>
+            <tbody id="s5-real-rows"></tbody>
+          </table>
+        </div>
+        <div class="emptybox" id="s5-empty">
+          <h2 class="sub">Chưa có nguồn nào</h2>
+          <p class="help" style="max-width:520px">Nguồn là một chỗ bạn lấy thông tin: một bảng thống kê, một trang tổ chức, một diễn đàn hay một nhóm. Thêm nguồn đầu tiên, rồi nạp dữ liệu vào, các màn xem sẽ hiện số thật.</p>
+          <button class="btn accent sm" type="button" data-act="addsrc">Thêm nguồn đầu tiên</button>
+        </div>
+        <span class="help" id="s5-rw"></span>
+      </div>
+      <div class="panel" id="s5-import" style="display:none" data-real-zone>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 class="sub">Nhận file từ máy chủ</h2><span class="label muted">Dành cho đội IT · script tự quét</span></div>
+        <div class="exp">
+          <p>Máy chủ iHouzz (IT cài) chạy script mỗi ngày và xuất ra <b>một file .jsonl</b>.</p>
+          <p>Chọn file đó ở đây. Trang kiểm tra từng dòng, <b>dòng có tên người, link cá nhân hay quảng cáo sẽ bị bỏ</b>, rồi mới lưu.</p>
+          <p>Nạp lại cùng một file không bị trùng.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+          <input type="file" id="imp-file" accept=".jsonl,.json,.txt" class="input" style="flex:1;min-width:220px">
+          <button class="btn line sm" type="button" data-real id="imp-check">Kiểm tra file</button>
+          <button class="btn accent sm" type="button" data-real id="imp-save" disabled>Lưu vào kho</button>
+        </div>
+        <details><summary class="help" style="cursor:pointer">Hoặc dán nội dung file vào đây</summary><textarea class="input" id="imp-paste" placeholder='{"kind":"signal", ...}' style="margin-top:8px"></textarea></details>
+        <div class="help" id="imp-report"></div>
+      </div>
+      <details id="s5-demo-wrap" open>
+      <summary class="btn line sm" id="s5-demo-sum" style="margin-bottom:12px">Bảng nguồn ví dụ</summary>
+      <div class="tablewrap">
+        <table class="tbl">
+          <thead><tr><th>Nhóm</th><th>Nguồn</th><th>Cách lấy</th><th>Chạy mấy lần</th><th class="num">Số dòng</th><th>Lấy được liên hệ</th><th>Trạng thái</th></tr></thead>
+          <tbody id="s5-rows">
+            <tr><td class="id">①</td><td class="strong">Bản đồ &amp; tìm kiếm (Naver, Google, Kakao)</td><td>Lấy tự động theo từ khóa từng thành phố</td><td>Hàng tháng</td><td class="num">1.912</td><td>Tổ chức</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr><td class="id">①</td><td class="strong">Hội đoàn, trang tin, Đại sứ quán</td><td>Theo dõi website, trang Facebook</td><td>Hàng tuần</td><td class="num">86</td><td>Tổ chức</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr><td class="id">①</td><td class="strong">Cơ quan phía Việt Nam (quản lý lao động, du học)</td><td>Tải danh sách công khai</td><td>Hàng quý</td><td class="num">214</td><td>Tổ chức</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr><td class="id">①</td><td class="strong">Biểu mẫu Facebook · khảo sát · Zalo chính thức</td><td>Người tự điền, chảy thẳng vào hệ thống</td><td>Ngay khi có</td><td class="num">126</td><td>Người tự đồng ý</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr><td class="id">①</td><td class="strong">YouTube (kênh chính thức)</td><td>Lấy tự động theo từ khóa tiếng Việt</td><td>Hàng tuần</td><td class="num">318</td><td>Cá nhân công khai</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr class="sel"><td class="id">①</td><td class="strong">TikTok · theo hashtag</td><td>Người xem và ghi lại kênh</td><td>Hàng tuần</td><td class="num">44</td><td>Cá nhân công khai</td><td><span class="st warn">Trễ 2 ngày</span></td></tr>
+            <tr><td class="id">②</td><td class="strong">Thống kê xuất nhập cảnh · Bộ Tư pháp Hàn Quốc</td><td>Tải file, máy tự đọc bảng</td><td>Hàng tháng</td><td class="num">17 tỉnh × visa</td><td>—</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr><td class="id">②</td><td class="strong">Thống kê cư dân nước ngoài theo quận (Hàn Quốc)</td><td>Tải bảng theo năm</td><td>Hàng năm</td><td class="num">229 quận</td><td>—</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr><td class="id">②</td><td class="strong">Công cụ quảng cáo Facebook · ước lượng số người</td><td>Lấy tự động, KHÔNG chạy quảng cáo</td><td>Hàng tháng</td><td class="num">17 × giới × tuổi</td><td>—</td><td><span class="st bad">Lỗi kết nối</span></td></tr>
+            <tr><td class="id">②</td><td class="strong">Công cụ từ khóa Google · xu hướng tìm kiếm</td><td>Lấy tự động, lọc ở Hàn, tiếng Việt</td><td>Hàng tháng</td><td class="num">120 từ khóa</td><td>—</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr><td class="id">③</td><td class="strong">Facebook · nhóm, trang công khai</td><td>Người vào xem, lấy mẫu bài đăng rồi ẩn danh</td><td>Hằng ngày</td><td class="num">1.102 bài</td><td>Không</td><td><span class="st">Người làm tay</span></td></tr>
+            <tr><td class="id">③</td><td class="strong">Bài đăng công khai từ các nguồn nhóm ①</td><td>Ẩn danh rồi máy tự xếp nhóm</td><td>Hằng ngày</td><td class="num">1.840</td><td>Không</td><td><span class="st ok">Đang chạy</span></td></tr>
+            <tr><td class="id">③</td><td class="strong">Reddit · diễn đàn + từ khóa tiếng Việt</td><td>Lấy tự động qua kênh chính thức, rồi ẩn danh</td><td>Hằng ngày</td><td class="num">0</td><td>Không</td><td><span class="st info">Chờ bật kết nối</span></td></tr>
+            <tr><td class="id">③</td><td class="strong">Quora · chủ đề người Việt ở Hàn</td><td>Không lấy tự động được → người lấy mẫu rồi ẩn danh</td><td>Hàng tuần</td><td class="num">0</td><td>Không</td><td><span class="st">Người làm tay</span></td></tr>
+            <tr><td class="id">③</td><td class="strong">Tài liệu công khai về gửi tiền, tài chính</td><td>Người đọc, tóm tắt</td><td>Hàng tháng</td><td class="num">0</td><td>Không</td><td><span class="st info">Chờ lịch</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      </details>
+      <div class="row c3">
+        <div class="alert bad" id="s5-al-fb"><div><p class="at">Công cụ quảng cáo Facebook · hết hạn kết nối</p><p class="ax">Phần ước lượng số người tháng 10 chưa lấy được. Cần đăng nhập lại rồi chạy lại.</p></div><button class="btn line sm">Mở</button></div>
+        <div class="alert warn" id="s5-al-tt"><div><p class="at">TikTok · trễ 2 ngày</p><p class="ax">Việc xem hashtag tuần này chưa làm. Người phụ trách: nhân sự hiểu cộng đồng.</p></div><button class="btn line sm">Nhắc</button></div>
+        <div class="alert"><div><p class="at">Nguyên tắc chung</p><p class="ax">Chỗ nào lấy tự động được thì lấy tự động. Chỗ nào không thì người vào lấy mẫu. Không dùng công cụ gom hàng loạt thông tin thành viên trong nhóm Facebook, Zalo, KakaoTalk.</p></div></div>
+      </div>
+      <div class="ftr"><span class="m">Nhóm ① lấy được liên hệ · Nhóm ② đếm quy mô · Nhóm ③ nghe ngóng nhu cầu</span><span class="m">“Số dòng” là số dòng dữ liệu, không phải số người</span></div>
+
+      <div id="addsrc-modal" style="position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:20px">
+        <div data-close="addsrc" style="position:absolute;inset:0;background:rgba(3,5,15,.55)"></div>
+        <div class="panel" role="dialog" aria-modal="true" aria-labelledby="addsrc-title" style="position:relative;width:min(540px,100%);max-height:88vh;overflow:auto;display:grid;gap:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+            <div class="sechead"><span class="num">+</span><span class="nm" id="addsrc-title">Thêm một nguồn</span></div>
+            <button class="btn line sm" type="button" data-close="addsrc">Đóng</button>
+          </div>
+          <form id="addsrc-form" style="display:grid;gap:12px">
+            <label class="field"><span class="label">Thuộc nhóm nào</span><select class="select" name="lop">
+              <option value="①">① Lấy được liên hệ (gọi, nhắn được)</option>
+              <option value="②">② Đếm quy mô (bao nhiêu người, ở đâu)</option>
+              <option value="③" selected>③ Nghe ngóng nhu cầu (đang quan tâm gì)</option>
+            </select></label>
+            <label class="field"><span class="label">Tên nguồn</span><input class="input" name="ten" required placeholder="VD: Threads · chủ đề người Việt ở Hàn"></label>
+            <label class="field"><span class="label">Lấy được liên hệ không</span><select class="select" name="daumoi">
+              <option>Không</option>
+              <option>Tổ chức</option>
+              <option>Cá nhân công khai</option>
+              <option>Người tự đồng ý</option>
+            </select></label>
+            <label class="field"><span class="label">Cách lấy</span><select class="select" name="cach">
+              <option>Lấy tự động qua kênh chính thức, rồi ẩn danh</option>
+              <option>Người vào xem, lấy mẫu rồi ẩn danh</option>
+              <option>Người tự điền, chảy thẳng vào hệ thống</option>
+              <option>Tải file, máy tự đọc bảng</option>
+              <option>Theo dõi website, trang Facebook</option>
+            </select></label>
+            <label class="field"><span class="label">Chạy mấy lần</span><select class="select" name="lich"><option>Ngay khi có</option><option>Hằng ngày</option><option selected>Hàng tuần</option><option>Hàng tháng</option><option>Hàng quý</option></select></label>
+            <div class="foot"><span class="help">Đây chỉ là thêm một dòng vào danh sách để cùng xem (trạng thái “Mới thêm”, chưa chạy thật). Nhắc: chỗ nào lấy tự động được thì lấy tự động, không thì người vào lấy mẫu — không gom hàng loạt thông tin thành viên trong nhóm Facebook/Zalo/Kakao.</span><button class="btn accent" type="submit">Lưu nguồn</button></div>
+          </form>
+          <form id="addsrc-form2" style="display:none;gap:14px" data-real-zone>
+            <div class="field"><span class="label">Bạn muốn thêm loại nguồn nào?</span>
+              <div class="kind-grid">
+                <label class="kind"><input type="radio" name="kind" value="stat" checked><b>② Số thống kê chính thức</b><span>Số người do cơ quan nhà nước công bố (theo tỉnh, theo tháng).</span></label>
+                <label class="kind"><input type="radio" name="kind" value="org"><b>① Tổ chức, hội đoàn</b><span>Liên hệ chung mà tổ chức tự đăng công khai trên trang chính thức.</span></label>
+                <label class="kind"><input type="radio" name="kind" value="forum"><b>③ Bài thảo luận công khai</b><span>Reddit, diễn đàn. Chỉ giữ nội dung đã ẩn danh, không giữ tên người đăng.</span></label>
+                <label class="kind"><input type="radio" name="kind" value="group"><b>① Nhóm Facebook / Zalo</b><span>Chỉ ghi thông tin của nhóm: tên, quy mô, mức hoạt động. Không ghi thành viên.</span></label>
+              </div>
+            </div>
+            <label class="field"><span class="label">Tên nguồn</span><input class="input" name="ten2" required placeholder="VD: Thống kê người nước ngoài theo tỉnh · Bộ Tư pháp Hàn"></label>
+            <label class="field"><span class="label" id="as2-urllabel">Đường link trang số liệu</span><input class="input" name="url2" placeholder="https://…"><span class="help" id="as2-urlhelp"></span></label>
+            <label class="field"><span class="label">Bao lâu nạp một lần</span><select class="select" name="lich2"><option>Hằng ngày</option><option selected>Hàng tuần</option><option>Hàng tháng</option><option>Hàng quý</option><option>Khi có dữ liệu mới</option></select></label>
+            <label class="field"><span class="label">Ghi chú (không bắt buộc)</span><input class="input" name="note2" placeholder="VD: IT chạy script mỗi ngày / người vận hành nhập tay mỗi tháng"></label>
+            <div class="alert warn" id="as2-block" style="display:none"><div><p class="at">Không thêm được nguồn này</p><p class="ax" id="as2-block-msg"></p></div></div>
+            <div class="foot"><span class="help">Lưu xong, bấm “Nạp dữ liệu” ở dòng nguồn để đưa số liệu vào.</span><button class="btn accent" type="submit" data-real>Lưu nguồn</button></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 FORM KHẢO SÁT -->
+    <section class="screen" id="s6">
+      <div class="head">
+        <div><div class="sechead"><span class="num">06</span><span class="nm">Kênh đồng ý · trang khảo sát công khai</span></div><h1 class="title">Biểu mẫu khảo sát · cỡ điện thoại</h1></div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span class="st info">Dữ liệu mẫu</span><span class="label muted">Giao diện tối · nhắm nữ giới Việt tại Hàn</span></div>
+      </div>
+      <div class="phonewrap">
+        <div class="phone midnight">
+          <div class="ihz-grid" style="color:#fff;font-family:var(--font-sans);display:flex;flex-direction:column">
+            <header style="display:flex;justify-content:space-between;align-items:center;padding:20px 20px 16px;border-bottom:2px solid rgba(91,140,255,.40)">
+              <span style="display:block" aria-label="iHouzz"><svg style='height:22px;width:auto;display:block' xmlns="http://www.w3.org/2000/svg" viewBox="0 91 241.31 59" ><g fill="#FFFFFF"><path d="M86.31,100.46c.92,0,1.82,.26,2.61,.75l14.77,9.28c1.44,.9,2.29,2.45,2.29,4.15v20.01c0,2.7-2.2,4.9-4.9,4.9h-29.54c-2.7,0-4.9-2.2-4.9-4.9v-20.01c0-1.7,.86-3.25,2.29-4.15l14.77-9.28c.78-.49,1.68-.75,2.61-.75m0-9.28c-2.38,0-4.76,.66-6.86,1.98l-16.07,10.1c-3.75,2.36-6.03,6.48-6.03,10.91v21.78c0,7.12,5.77,12.89,12.89,12.89h32.14c7.12,0,12.89-5.77,12.89-12.89v-21.78c0-4.43-2.28-8.55-6.03-10.91l-16.07-10.1c-2.1-1.32-4.48-1.98-6.86-1.98"></path><path d="M74.09,122.16c-.8,0-1.42,.7-1.34,1.49,.74,6.79,6.5,12.08,13.49,12.08s12.74-5.28,13.49-12.07c.09-.8-.54-1.49-1.34-1.49h-5.4c-.65,0-1.19,.48-1.32,1.12-.52,2.52-2.75,4.42-5.43,4.42s-4.91-1.91-5.43-4.43c-.13-.64-.67-1.11-1.32-1.11h-5.4Z"></path><path d="M1.34,99.59h6.71c.71,0,1.28,.57,1.28,1.28v7.28H.05v-7.28c0-.71,.57-1.28,1.28-1.28Z"></path><path d="M42.05,147.5v-19.31H24.74v19.31c0,.68-.55,1.23-1.23,1.23H15.42v-49.1h8.09c.68,0,1.23,.55,1.23,1.23v18.27h17.32v-18.27c0-.68,.55-1.23,1.23-1.23h8.02v49.1h-8.02c-.68,0-1.23-.55-1.23-1.23Z"></path><path d="M132.06,148.55c-2.17-.85-4.08-2.07-5.72-3.67-1.6-1.65-2.83-3.56-3.67-5.72-.85-2.17-1.27-4.52-1.27-7.07v-32.44h8.08c.69,0,1.24,.56,1.24,1.24v31.34c0,2.68,.74,4.77,2.23,6.25,1.49,1.48,3.54,2.23,6.18,2.23s4.77-.74,6.25-2.23c1.49-1.48,2.23-3.57,2.23-6.25v-31.34c0-.69,.56-1.24,1.24-1.24h8.08v32.44c0,2.54-.43,4.9-1.27,7.07-.85,2.17-2.07,4.08-3.67,5.72-1.65,1.6-3.57,2.83-5.76,3.67s-4.56,1.27-7.1,1.27-4.9-.42-7.07-1.27"></path><path d="M173.12,148.73h25.94v-7.6c0-.68-.55-1.23-1.23-1.23h-24.79c-.68,0-1.23-.56-1.23-1.24,0-.36,.16-.69,.41-.92l.03-.02,22.63-19.78,1.13-1.2c3.91-3.91,3.91-10.25,0-14.15-1.83-1.83-4.18-2.8-6.57-2.92l-.39-.02h-26v7.6c0,.68,.55,1.23,1.23,1.23h24.63s.18,0,.18,0c.68,0,1.23,.55,1.23,1.23,0,.31-.12,.6-.31,.82l-.21,.19-22.56,19.72-.9,.83c-2.05,1.83-3.33,4.49-3.33,7.46,0,5.53,4.48,10.01,10.01,10.01h.12Z"></path><path d="M215.37,148.73h25.94v-7.6c0-.68-.55-1.23-1.23-1.23h-24.79c-.68,0-1.23-.56-1.23-1.24,0-.36,.16-.69,.41-.92l.03-.02,22.63-19.78,1.13-1.2c3.91-3.91,3.91-10.25,0-14.15-1.83-1.83-4.18-2.8-6.57-2.92l-.39-.02h-26v7.6c0,.68,.55,1.23,1.23,1.23h24.63s.18,0,.18,0c.68,0,1.23,.55,1.23,1.23,0,.31-.12,.6-.31,.82l-.21,.19-22.56,19.72-.9,.83c-2.05,1.83-3.33,4.49-3.33,7.46,0,5.53,4.48,10.01,10.01,10.01h.12Z"></path><rect y="111.88" width="9.25" height="36.85"></rect></g></svg></span>
+              <span class="coord" style="font-size:11px">[ 37.6°N · 127.0°E ]</span>
+            </header>
+            <section style="margin:28px 20px 0;padding-left:28px;border-left:12px solid #ff8a1f;display:grid;gap:12px">
+              <div class="sechead"><span class="num">01</span><span class="nm">Khảo sát · 5 phút</span></div>
+              <h2 style="font:700 30px/1.05 var(--font-sans);letter-spacing:-.03em;margin:0;color:#fff">Chị đang ở Hàn, chị đang cần gì?</h2>
+              <p class="body">iHouzz đang lắng nghe cộng đồng người Việt tại Hàn Quốc để hiểu đúng điều mọi người quan tâm: gửi tiền về, mua nhà cho bố mẹ, học tập, việc làm, về nước. Thông tin chị để lại chỉ dùng để liên hệ lại về đúng nội dung này, khi chị đồng ý.</p>
+            </section>
+            <form style="display:flex;flex-direction:column;gap:28px;padding:28px 20px 0" onsubmit="event.preventDefault()">
+              <fieldset class="q"><legend>1 · Chị thuộc nhóm nào <span style="color:#ff8a1f">*</span></legend>
+                <label class="opt rad"><input type="radio" name="nhom" value="kethon" checked required> Kết hôn, định cư lâu dài</label>
+                <label class="opt rad"><input type="radio" name="nhom" value="laodong"> Đi làm theo chương trình lao động</label>
+                <label class="opt rad"><input type="radio" name="nhom" value="duhoc"> Du học, học tiếng</label>
+                <label class="opt rad"><input type="radio" name="nhom" value="kinhdoanh"> Kinh doanh, buôn bán</label>
+                <label class="opt rad"><input type="radio" name="nhom" value="khac"> Khác</label>
+              </fieldset>
+              <fieldset class="q"><legend>2 · Điều chị quan tâm nhất (chọn nhiều)</legend>
+                <label class="opt"><input type="checkbox" name="quantam" value="guitien"> Gửi tiền về Việt Nam</label>
+                <label class="opt"><input type="checkbox" name="quantam" value="nhadat"> Mua nhà, đất hoặc xây nhà cho bố mẹ</label>
+                <label class="opt"><input type="checkbox" name="quantam" value="vieclam"> Việc làm, gia hạn visa</label>
+                <label class="opt"><input type="checkbox" name="quantam" value="hoctap"> Học tập cho mình hoặc cho con</label>
+                <label class="opt"><input type="checkbox" name="quantam" value="venuoc"> Về nước lập nghiệp</label>
+              </fieldset>
+              <label class="field"><span class="label" style="color:#5b8cff">3 · Chị đang ở tỉnh nào tại Hàn</span><select class="select"><option>Chọn tỉnh, thành</option><option>Gyeonggi</option><option>Seoul</option><option>Busan</option><option>Daegu</option></select></label>
+              <label class="field"><span class="label" style="color:#5b8cff">4 · Quê chị ở Việt Nam</span><select class="select"><option>Chọn tỉnh, thành</option><option>Hải Dương</option><option>Nghệ An</option><option>Cần Thơ</option><option>Khác</option></select></label>
+              <label class="field"><span class="label" style="color:#5b8cff">5 · Tên gọi</span><input class="input" type="text" placeholder="Không cần họ tên đầy đủ"></label>
+              <label class="field"><span class="label" style="color:#5b8cff">6 · Số điện thoại hoặc Zalo <span style="color:#ff8a1f">*</span></span><input class="input" type="tel" required placeholder="010-0000-0000 hoặc số Zalo"><span class="help">Chỉ dùng để liên hệ lại về khảo sát này.</span></label>
+              <div class="panel" style="padding:16px;gap:10px"><span class="label" style="color:#5b8cff">Quà cảm ơn</span><p class="body" style="font-size:14px">[Cẩm nang hoặc quà nhỏ — chốt sau]</p><span class="help">Gửi qua Zalo sau khi chị gửi khảo sát.</span></div>
+              <div class="consent">
+                <label><input type="checkbox" name="dongy_lienhe" required><span>Tôi đồng ý để iHouzz liên hệ qua số trên về nội dung khảo sát này. Tôi có thể dừng bất cứ lúc nào bằng cách nhắn "DỪNG". <span style="color:#ff8a1f">*</span></span></label>
+                <label><input type="checkbox" name="dongy_dulieu"><span>Tôi đã đọc <a href="#" style="color:#5b8cff">cách iHouzz lưu và dùng thông tin</a>: lưu trên hệ thống nội bộ, không bán, không chia sẻ cho bên thứ ba.</span></label>
+              </div>
+              <button type="submit" class="btn accent" style="justify-content:center;padding:18px 22px">Gửi khảo sát</button>
+              <span class="help" style="text-align:center">Chưa đồng ý vẫn gửi được khảo sát, iHouzz chỉ không liên hệ lại. Hai mục có dấu <span style="color:#ff8a1f">*</span> là bắt buộc.</span>
+            </form>
+            <footer style="margin-top:28px;padding:24px 20px;background:#03050f;border-top:2px solid rgba(91,140,255,.40);display:grid;gap:8px">
+              <span class="ftr m" style="border:0;padding:0">Công ty Cổ phần Công nghệ iHouzz</span>
+              <span class="ftr m" style="border:0;padding:0">[ 10.8°N · 106.7°E ] · ihouzz.com</span>
+            </footer>
+          </div>
+        </div>
+      </div>
+      <div class="ftr"><span class="m">Người điền tự để lại thông tin và tự đồng ý · không gom số từ bài đăng trong nhóm</span><span class="m">Theo iHOUZZ Design System · giao diện tối</span></div>
+    </section>
+
+    <!-- 07 PHÂN BỐ ĐỊA LÝ -->
+    <section class="screen" id="s7">
+      <div class="head">
+        <div><div class="sechead"><span class="num">07</span><span class="nm">Phân bố địa lý · hai phía</span></div><h1 class="title">Cộng đồng ở đâu tại Hàn, hướng về đâu ở Việt Nam</h1></div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span class="st info" id="s7-badge">Dữ liệu mẫu</span><span class="label muted">Bản đồ ô vuông · màu càng đậm càng đông</span></div>
+      </div>
+
+      <section aria-label="Điểm chính" class="row c3" id="s7-kpis">
+        <div class="kpi"><span class="k">Đông nhất tại Hàn</span><span class="v">Gyeonggi<small>38%</small></span><span class="d">Ansan · Hwaseong · Suwon</span></div>
+        <div class="kpi"><span class="k">Quê nhiều nhất (tự khai)</span><span class="v">Bắc Trung Bộ<small>34%</small></span><span class="d">Nghệ An · Hà Tĩnh · Thanh Hóa · 126 lượt khai</span></div>
+        <div class="kpi"><span class="k">Tỉ lệ nữ cao nhất</span><span class="v">Gyeonggi<small>61%</small></span><span class="d up">nhóm kết hôn + lao động nữ</span></div>
+      </section>
+
+      <div class="row c2">
+        <div class="panel">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 class="sub">Nơi ở tại Hàn Quốc</h2><span class="st info" id="s7-left-badge">Nguồn chính thức</span></div>
+          <span class="help" id="s7-left-help">% người Việt đăng ký cư trú · Bộ Tư pháp Hàn Quốc và cơ quan thống kê Hàn Quốc (theo tháng)</span>
+          <svg id="s7-svg-kr" viewBox="0 0 320 288" width="100%" style="height:auto;display:block" role="img" aria-label="Bản đồ sơ đồ phân bố người Việt theo khu vực tại Hàn Quốc">
+            <g font-family="'Geist Mono',ui-monospace,monospace">
+              <g><rect x="8" y="20" width="70" height="56" fill="#bcccf4" stroke="#6f86d8" stroke-width="2"/><text x="16" y="42" font-size="9" letter-spacing="1" fill="#070b1f">INCHEON</text><text x="16" y="62" font-size="15" font-weight="700" font-family="'Geist',sans-serif" fill="#070b1f">7%</text></g>
+              <g><rect x="86" y="20" width="70" height="56" fill="#8aa4ea" stroke="#6f86d8" stroke-width="2"/><text x="94" y="42" font-size="9" letter-spacing="1" fill="#0b1230">SEOUL</text><text x="94" y="62" font-size="15" font-weight="700" font-family="'Geist',sans-serif" fill="#0b1230">19%</text></g>
+              <g><rect x="164" y="20" width="70" height="56" fill="#2f5fd0" stroke="#6f86d8" stroke-width="2"/><text x="172" y="42" font-size="9" letter-spacing="1" fill="#fff">GYEONGGI</text><text x="172" y="62" font-size="15" font-weight="700" font-family="'Geist',sans-serif" fill="#fff">38%</text></g>
+              <g><rect x="242" y="20" width="70" height="56" fill="#e4ebfc" stroke="#6f86d8" stroke-width="2"/><text x="250" y="42" font-size="9" letter-spacing="1" fill="#070b1f">GANGWON</text><text x="250" y="62" font-size="15" font-weight="700" font-family="'Geist',sans-serif" fill="#070b1f">2%</text></g>
+              <g><rect x="86" y="84" width="70" height="56" fill="#bcccf4" stroke="#6f86d8" stroke-width="2"/><text x="94" y="106" font-size="8.5" letter-spacing="0.5" fill="#070b1f">CHUNGCHEONG</text><text x="94" y="126" font-size="15" font-weight="700" font-family="'Geist',sans-serif" fill="#070b1f">9%</text></g>
+              <g><rect x="164" y="84" width="70" height="56" fill="#e4ebfc" stroke="#6f86d8" stroke-width="2"/><text x="172" y="106" font-size="9" letter-spacing="1" fill="#070b1f">DAEGU</text><text x="172" y="126" font-size="15" font-weight="700" font-family="'Geist',sans-serif" fill="#070b1f">4%</text></g>
+              <g><rect x="8" y="148" width="70" height="56" fill="#e4ebfc" stroke="#6f86d8" stroke-width="2"/><text x="16" y="170" font-size="9" letter-spacing="1" fill="#070b1f">JEOLLA</text><text x="16" y="190" font-size="15" font-weight="700" font-family="'Geist',sans-serif" fill="#070b1f">3%</text></g>
+              <g><rect x="164" y="148" width="70" height="56" fill="#8aa4ea" stroke="#6f86d8" stroke-width="2"/><text x="172" y="170" font-size="9" letter-spacing="1" fill="#0b1230">GYEONGSANG</text><text x="172" y="190" font-size="15" font-weight="700" font-family="'Geist',sans-serif" fill="#0b1230">14%</text></g>
+              <g><rect x="242" y="148" width="70" height="56" fill="#bcccf4" stroke="#6f86d8" stroke-width="2"/><text x="250" y="170" font-size="9" letter-spacing="1" fill="#070b1f">BUSAN</text><text x="250" y="190" font-size="15" font-weight="700" font-family="'Geist',sans-serif" fill="#070b1f">6%</text></g>
+              <g><rect x="86" y="212" width="70" height="56" fill="#e4ebfc" stroke="#6f86d8" stroke-width="2"/><text x="94" y="234" font-size="9" letter-spacing="1" fill="#070b1f">JEJU</text><text x="94" y="254" font-size="15" font-weight="700" font-family="'Geist',sans-serif" fill="#070b1f">1%</text></g>
+            </g>
+          </svg>
+          <div class="legend"><span><i style="background:#e4ebfc;border:1px solid #c3cff0"></i>&lt;5%</span><span><i style="background:#bcccf4"></i>5–9%</span><span><i style="background:#8aa4ea"></i>10–19%</span><span><i style="background:#5577dd"></i>20–29%</span><span><i style="background:#2f5fd0"></i>≥30%</span></div>
+          <div class="tablewrap" style="border:0">
+            <table class="tbl" id="s7-tbl"><thead><tr><th>Tỉnh/thành</th><th class="num">%</th><th class="num">Nữ</th><th>Nhóm chính</th></tr></thead>
+              <tbody>
+                <tr><td class="strong">Gyeonggi</td><td class="num">38%</td><td class="num">61%</td><td>Lao động, kết hôn</td></tr>
+                <tr><td class="strong">Seoul</td><td class="num">19%</td><td class="num">58%</td><td>Du học, văn phòng</td></tr>
+                <tr><td class="strong">Gyeongsang</td><td class="num">14%</td><td class="num">55%</td><td>Lao động (Gimhae, Changwon)</td></tr>
+                <tr><td class="strong">Chungcheong</td><td class="num">9%</td><td class="num">57%</td><td>Lao động thời vụ</td></tr>
+                <tr><td class="strong">Incheon</td><td class="num">7%</td><td class="num">60%</td><td>Hỗn hợp</td></tr>
+                <tr><td class="strong">Busan</td><td class="num">6%</td><td class="num">59%</td><td>Du học, dịch vụ</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><h2 class="sub">Quê ở Việt Nam</h2><span class="st warn" id="s7-right-badge">Tự khai · 126 lượt</span></div>
+          <span class="help">% quê của người đã đồng ý, tự khai trong biểu mẫu · bài đăng công khai chỉ đếm riêng để tham khảo</span>
+          <svg viewBox="0 0 264 356" width="100%" style="height:auto;display:block;max-width:360px;margin:0 auto" role="img" aria-label="Bản đồ sơ đồ quê quán người đã đồng ý, theo vùng ở Việt Nam">
+            <g font-family="'Geist Mono',ui-monospace,monospace">
+              <g><rect x="8" y="16" width="120" height="48" fill="#e4ebfc" stroke="#6f86d8" stroke-width="2"/><text x="17" y="36" font-size="9" letter-spacing="0.5" fill="#070b1f">TD &amp; MN BẮC BỘ</text><text x="17" y="54" font-size="14" font-weight="700" font-family="'Geist',sans-serif" fill="#070b1f">2%</text></g>
+              <g><rect x="136" y="72" width="120" height="48" fill="#5577dd" stroke="#6f86d8" stroke-width="2"/><text x="145" y="92" font-size="9" letter-spacing="0.5" fill="#fff">ĐB SÔNG HỒNG</text><text x="145" y="110" font-size="14" font-weight="700" font-family="'Geist',sans-serif" fill="#fff">29%</text></g>
+              <g><rect x="136" y="128" width="120" height="48" fill="#2f5fd0" stroke="#6f86d8" stroke-width="2"/><text x="145" y="148" font-size="9" letter-spacing="0.5" fill="#fff">BẮC TRUNG BỘ</text><text x="145" y="166" font-size="14" font-weight="700" font-family="'Geist',sans-serif" fill="#fff">34%</text></g>
+              <g><rect x="136" y="184" width="120" height="48" fill="#bcccf4" stroke="#6f86d8" stroke-width="2"/><text x="145" y="204" font-size="9" letter-spacing="0.5" fill="#070b1f">NAM TRUNG BỘ</text><text x="145" y="222" font-size="14" font-weight="700" font-family="'Geist',sans-serif" fill="#070b1f">5%</text></g>
+              <g><rect x="8" y="240" width="120" height="48" fill="#e4ebfc" stroke="#6f86d8" stroke-width="2"/><text x="17" y="260" font-size="9" letter-spacing="0.5" fill="#070b1f">TÂY NGUYÊN</text><text x="17" y="278" font-size="14" font-weight="700" font-family="'Geist',sans-serif" fill="#070b1f">3%</text></g>
+              <g><rect x="136" y="240" width="120" height="48" fill="#8aa4ea" stroke="#6f86d8" stroke-width="2"/><text x="145" y="260" font-size="9" letter-spacing="0.5" fill="#0b1230">ĐÔNG NAM BỘ</text><text x="145" y="278" font-size="14" font-weight="700" font-family="'Geist',sans-serif" fill="#0b1230">11%</text></g>
+              <g><rect x="8" y="296" width="120" height="48" fill="#8aa4ea" stroke="#6f86d8" stroke-width="2"/><text x="17" y="316" font-size="8.5" letter-spacing="0.3" fill="#0b1230">ĐB SÔNG CỬU LONG</text><text x="17" y="334" font-size="14" font-weight="700" font-family="'Geist',sans-serif" fill="#0b1230">16%</text></g>
+            </g>
+          </svg>
+          <div class="legend"><span><i style="background:#e4ebfc;border:1px solid #c3cff0"></i>&lt;5%</span><span><i style="background:#bcccf4"></i>5–9%</span><span><i style="background:#8aa4ea"></i>10–19%</span><span><i style="background:#5577dd"></i>20–29%</span><span><i style="background:#2f5fd0"></i>≥30%</span></div>
+          <div class="tablewrap" style="border:0">
+            <table class="tbl"><thead><tr><th>Vùng</th><th class="num">%</th><th>Tỉnh tiêu biểu</th></tr></thead>
+              <tbody>
+                <tr><td class="strong">Bắc Trung Bộ</td><td class="num">34%</td><td>Nghệ An, Hà Tĩnh, Thanh Hóa</td></tr>
+                <tr><td class="strong">ĐB sông Hồng</td><td class="num">29%</td><td>Hải Dương, Hải Phòng, Hà Nội</td></tr>
+                <tr><td class="strong">ĐB sông Cửu Long</td><td class="num">16%</td><td>Cần Thơ, Hậu Giang</td></tr>
+                <tr><td class="strong">Đông Nam Bộ</td><td class="num">11%</td><td>TP.HCM, Đồng Nai</td></tr>
+                <tr><td class="strong">Nam Trung Bộ</td><td class="num">5%</td><td>Đà Nẵng, Khánh Hòa</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="gap:12px" id="s7-comb">
+        <h2 class="sub" style="font-size:16px">Ghép hai phía: chỉ từ người tự khai</h2>
+        <p class="body" style="font-size:14px">Hai bản đồ trên là hai nguồn riêng biệt — một từ đăng ký cư trú, một từ biểu mẫu người tự khai — nên <strong>không ghép được ở mức từng người</strong>. Chỉ nối được hai phía từ 126 lượt khai có CẢ nơi ở tại Hàn lẫn quê. Trong số đó, rõ nhất là <strong>Gyeonggi → Bắc Trung Bộ</strong> và <strong>ĐB sông Hồng</strong>; số lượng còn ít nên chỉ mang tính gợi ý.</p>
+        <span class="help">Sơ đồ ô lưới đặt gần đúng vị trí, không phải ranh giới hành chính. Trái = số chính thức; phải = quê tự khai của 126 người đã đồng ý; lần nhắc địa phương trong bài đăng công khai đếm riêng như tín hiệu tham khảo, không trộn vào đây.</span>
+      </div>
+
+      <div class="ftr"><span class="m">Trái: số chính thức (cơ quan Hàn Quốc) · Phải: quê tự khai trong biểu mẫu đồng ý · Hành lang: chỉ từ dòng có cả hai</span><span class="m">Bài đăng công khai = tín hiệu tham khảo, không phải số đo</span></div>
+    </section>
+
+  </main>
+</div>
+<div id="load-modal" class="mdl paper" data-real-zone>
+  <div class="bk" data-lclose="1"></div>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="ld-title">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div class="sechead"><span class="num">+</span><span class="nm" id="ld-title">Nạp dữ liệu</span></div><button class="btn line sm" type="button" data-real data-lclose="1">Đóng</button></div>
+    <label class="field"><span class="label">Nạp vào nguồn</span><select class="select" id="ld-srcsel"></select></label>
+    <span class="help" id="ld-src"></span>
+
+    <div class="ldp" id="ld-forum">
+      <div class="exp"><p><b>3 bước:</b> dán bài → máy ẩn danh → máy xếp nhóm rồi lưu.</p><p>Chỉ dán <b>nội dung bài</b>. Đừng dán tên người đăng. Trang chỉ lưu bản tóm tắt đã ẩn danh, không lưu nguyên văn.</p></div>
+      <label class="field"><span class="label">Dán bài đăng công khai (mỗi bài cách nhau một dòng trống)</span><textarea class="input" id="ld-posts" placeholder="Bài 1…&#10;&#10;Bài 2…"></textarea></label>
+      <div class="two"><label class="field"><span class="label">Ngày đăng (chung cho các bài)</span><input class="input" type="date" id="ld-date"></label><label class="field"><span class="label">Nơi đăng (ghi nhận, không phải tên người)</span><input class="input" id="ld-where" placeholder="VD: r/korea"></label></div>
+      <div class="rowact"><button class="btn line sm" type="button" data-real id="ld-anon">1 · Ẩn danh &amp; xem trước</button><button class="btn line sm" type="button" data-real id="ld-class" disabled>2 · Máy xếp nhóm</button><button class="btn accent sm" type="button" data-real id="ld-save" disabled>3 · Lưu vào kho</button></div>
+      <div id="ld-preview" class="pvlist"></div>
+    </div>
+
+    <div class="ldp" id="ld-org">
+      <div class="exp"><p>Chỉ thêm <b>tổ chức</b> và liên hệ <b>chung</b> mà họ tự đăng công khai.</p><p>Có thể dán trang liên hệ của họ để máy điền nhanh, rồi bạn kiểm tra lại.</p></div>
+      <label class="field"><span class="label">Dán nội dung trang liên hệ / giới thiệu chính thức (không bắt buộc)</span><textarea class="input" id="og-paste" placeholder="Dán chữ từ trang web của tổ chức…"></textarea></label>
+      <div class="rowact"><button class="btn line sm" type="button" data-real id="og-fill">Điền nhanh</button></div>
+      <div class="two"><label class="field"><span class="label">Tên tổ chức *</span><input class="input" id="og-name"></label><label class="field"><span class="label">Loại *</span><select class="select" id="og-type"><option>Hội đoàn</option><option>Doanh nghiệp Việt tại Hàn</option><option>Tổ chức phía Việt Nam</option></select></label></div>
+      <div class="two"><label class="field"><span class="label">Tỉnh / thành</span><select class="select" id="og-prov"><option value="">Chưa rõ</option><option>Seoul</option><option>Busan</option><option>Incheon</option><option>Daegu</option><option>Daejeon</option><option>Gwangju</option><option>Ulsan</option><option>Sejong</option><option>Gyeonggi</option><option>Gangwon</option><option>Chungcheong Bắc</option><option>Chungcheong Nam</option><option>Jeolla Bắc</option><option>Jeolla Nam</option><option>Gyeongsang Bắc</option><option>Gyeongsang Nam</option><option>Jeju</option><option>Việt Nam</option><option>Khác</option></select></label><label class="field"><span class="label">Khu vực nhỏ (nếu có)</span><input class="input" id="og-sub" placeholder="VD: Ansan"></label></div>
+      <div class="two"><label class="field"><span class="label">Điện thoại chung</span><input class="input" id="og-phone"></label><label class="field"><span class="label">Email chung</span><input class="input" id="og-email"></label></div>
+      <div class="two"><label class="field"><span class="label">Website</span><input class="input" id="og-web"></label><label class="field"><span class="label">Facebook (trang của tổ chức)</span><input class="input" id="og-fb"></label></div>
+      <div class="two"><label class="field"><span class="label">Zalo (trang chính thức)</span><input class="input" id="og-zalo"></label><label class="field"><span class="label">YouTube / TikTok</span><input class="input" id="og-yt"></label></div>
+      <label class="field"><span class="label">Địa chỉ</span><input class="input" id="og-addr"></label>
+      <label class="field"><span class="label">Link nguồn gốc *</span><input class="input" id="og-src" placeholder="Trang chính thức nơi tổ chức tự đăng liên hệ"><span class="help">Để sau này ai cũng kiểm tra lại được.</span></label>
+      <label class="chk2"><input type="checkbox" id="og-ok"><span>Đây là liên hệ <b>chung của tổ chức</b>, không phải số hay trang cá nhân của một người.</span></label>
+      <div class="rowact"><button class="btn accent sm" type="button" data-real id="og-save">Lưu tổ chức</button></div>
+    </div>
+
+    <div class="ldp" id="ld-group">
+      <div class="alert warn"><div><p class="at">Chỉ ghi thông tin của nhóm</p><p class="ax">Không dán danh sách thành viên, không ghi tên hay số của thành viên.</p></div></div>
+      <div class="two"><label class="field"><span class="label">Tên nhóm *</span><input class="input" id="gp-name"></label><label class="field"><span class="label">Nền tảng</span><select class="select" id="gp-plat"><option>Facebook</option><option>Zalo</option><option>KakaoTalk</option><option>Khác</option></select></label></div>
+      <div class="two"><label class="field"><span class="label">Số thành viên (nhóm tự hiển thị)</span><input class="input" id="gp-size" inputmode="numeric" placeholder="VD: 28400"></label><label class="field"><span class="label">Mức hoạt động</span><select class="select" id="gp-act"><option>Chưa rõ</option><option>Cao</option><option>Vừa</option><option>Thấp</option></select></label></div>
+      <div class="two"><label class="field"><span class="label">Tỉnh / thành chính</span><select class="select" id="gp-prov"><option value="">Chưa rõ</option><option>Seoul</option><option>Busan</option><option>Incheon</option><option>Daegu</option><option>Daejeon</option><option>Gwangju</option><option>Ulsan</option><option>Sejong</option><option>Gyeonggi</option><option>Gangwon</option><option>Chungcheong Bắc</option><option>Chungcheong Nam</option><option>Jeolla Bắc</option><option>Jeolla Nam</option><option>Gyeongsang Bắc</option><option>Gyeongsang Nam</option><option>Jeju</option><option>Khác</option></select></label><label class="field"><span class="label">Link nhóm (không bắt buộc)</span><input class="input" id="gp-url"></label></div>
+      <label class="field"><span class="label">Liên hệ quản trị mà nhóm tự công khai (không bắt buộc)</span><input class="input" id="gp-admin" placeholder="Email hoặc trang mà nhóm tự ghi ở phần giới thiệu"></label>
+      <label class="field"><span class="label">Ghi chú</span><input class="input" id="gp-note"></label>
+      <label class="chk2"><input type="checkbox" id="gp-ok"><span>Tôi chỉ ghi thông tin của <b>nhóm</b>, không ghi tên hay số của thành viên.</span></label>
+      <div class="rowact"><button class="btn accent sm" type="button" data-real id="gp-save">Lưu nhóm</button></div>
+    </div>
+
+    <div class="ldp" id="ld-stat">
+      <div class="exp"><p>Nhập số người Việt <b>theo tỉnh</b> từ bảng thống kê chính thức.</p><p>Mỗi dòng: <b>Tên tỉnh ; Số người ; Số nữ (không bắt buộc)</b>. Dán thẳng từ Excel cũng được.</p></div>
+      <div class="two"><label class="field"><span class="label">Kỳ số liệu *</span><input class="input" id="st-period" placeholder="2026-09 hoặc 2026"></label><label class="field"><span class="label">Độ tin cậy</span><select class="select" id="st-conf"><option>chính thức</option><option>thứ cấp</option></select></label></div>
+      <label class="field"><span class="label">Dán bảng số</span><textarea class="input" id="st-csv" placeholder="Gyeonggi ; 123456 ; 71000&#10;Seoul ; 54321 ; 30000&#10;Toàn quốc ; 305936"></textarea></label>
+      <label class="field"><span class="label">Nguồn: tên bảng và link *</span><input class="input" id="st-src"><span class="help">“Chính thức” chỉ khi số do cơ quan nhà nước công bố và bạn có link. Trích lại qua bên thứ ba thì chọn “thứ cấp”.</span></label>
+      <div class="rowact"><button class="btn line sm" type="button" data-real id="st-check">Kiểm tra bảng</button><button class="btn accent sm" type="button" data-real id="st-save" disabled>Lưu vào kho</button></div>
+      <div id="st-preview" class="pvlist"></div>
+    </div>
+  </div>
+</div>
+<div class="toast-wrap" id="toasts" aria-live="polite"></div>
+<script src="assets/ui.js"></script>
+<script src="assets/data.js"></script>
+</body>
+</html>
