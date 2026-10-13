@@ -1,0 +1,65 @@
+# Quy trình GitHub Actions cho repo "quét khách hàng AI" (chuyển từ .gitlab-ci.yml).
+#  - web-check: kiểm cú pháp JS của giao diện
+#  - scripts-selftest: chạy phần tự kiểm (offline) của các script
+#  - pages: đăng thư mục web/ lên GitHub Pages (chỉ khi push vào nhánh mặc định)
+#    Lưu ý: GitHub Pages cho repo riêng tư (private) cần gói trả phí
+#    (Pro/Team/Enterprise). Nếu tài khoản đang ở gói Free, job "pages" sẽ không
+#    có nơi để đăng — có thể bỏ job này hoặc chuyển repo sang public khi cần demo.
+#  Chưa chạy thử trên GitHub Actions thật; xem README mục "Đăng lên GitHub Pages".
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  web-check:
+    runs-on: ubuntu-latest
+    container: node:22-alpine
+    steps:
+      - uses: actions/checkout@v4
+      - run: test -f web/index.html
+      - run: test -f web/assets/styles.css
+      - run: for f in web/assets/*.js; do node --check "$f"; done
+
+  scripts-selftest:
+    runs-on: ubuntu-latest
+    container: python:3.12-slim
+    steps:
+      - uses: actions/checkout@v4
+      - name: open_data_scan self-test
+        working-directory: open_data_scan
+        run: |
+          python sg_acra_scan.py --self-test
+          python import_directory.py --self-test
+      - name: reddit_scan self-test
+        working-directory: reddit_scan
+        run: |
+          python reddit_ingest.py --self-test
+          python export_for_page.py --self-test
+          python kosis_ingest.py --self-test
+
+  pages:
+    needs: [web-check, scripts-selftest]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+      - id: deployment
+        uses: actions/deploy-pages@v4
