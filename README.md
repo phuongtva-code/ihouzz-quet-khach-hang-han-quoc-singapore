@@ -29,15 +29,20 @@ Giao diện dùng font Geist từ Google Fonts, nên cần có Internet để hi
 
 ## Giao diện chạy ngoài Claude thì khác gì
 
-Bản V19 gốc chạy trên claude.ai và dùng ba khả năng của nền tảng đó: kho dữ liệu trong trang (nguồn, thống kê, tổ chức, tín hiệu), "Máy xếp nhóm" do Claude phân loại bài, và nhận diện người xem để phân quyền. Trên GitHub Pages những khả năng này không có, nên:
+Bản V19 gốc chạy trên claude.ai và dùng ba khả năng của nền tảng đó: kho dữ liệu trong trang (nguồn, thống kê, tổ chức, tín hiệu), "Máy xếp nhóm" do Claude phân loại bài, và nhận diện người xem để phân quyền. Trên GitHub Pages hoặc mở local, trang chạy ở **chế độ file** nhờ `assets/localdb.js`:
 
-- Trang tự rơi về **chế độ ví dụ**: hiện đủ 9 màn hình (00–08) với dữ liệu mẫu, có nhãn "Ví dụ · chưa có số thật".
-- "Thêm nguồn" chỉ thêm dòng thử vào bảng và báo rõ là bản thử, tải lại trang là mất.
-- Nút **"Reset giao diện demo"** (thanh trên cùng) tóm tắt các thao tác demo vừa làm vào Màn 08 "Kết quả đã lưu" (chỉ lưu trong trình duyệt đang dùng, localStorage) rồi đưa giao diện về dữ liệu mẫu ban đầu.
-- "Nạp dữ liệu" và "Nhận file từ máy chủ" (Màn 05) cần kho dữ liệu nên không dùng được.
-- Muốn số thật trên GitHub Pages cần thêm một máy chủ lưu trữ (ví dụ Lark Base qua API). Phần này chưa làm.
+- Kho dữ liệu nằm trong **trình duyệt đang dùng** (localStorage, khóa `ihz_localdb_v1`). Mở lại vẫn còn, nhưng **mỗi máy một kho**, máy khác không thấy.
+- Màn 05 → "Nhận file từ máy chủ": chọn hoặc dán file `.jsonl` do script xuất ra (định dạng ở `reddit_scan/IMPORT_SPEC.md`). Trang kiểm tra từng dòng rồi lưu; nạp lại cùng file không trùng. Sau khi nạp, các màn 01 · 02 · 04 · 05 · 07 hiện số thật (nhãn "Số thật"), thanh trên cùng hiện số bản ghi trong kho.
+- Các nút ghi dữ liệu chạy thật: Thêm nguồn, Thêm đầu mối, Lưu tổ chức / nhóm / thống kê, xác nhận nhãn (Màn 04), đánh dấu xác minh (Màn 02).
+- **Xuất**: "Xuất danh sách đã xác minh" (Màn 02) tải CSV các đầu mối tổ chức ở trạng thái Đã xác minh (mở được bằng Excel); "Xuất báo cáo tuần" (Màn 01) tải báo cáo `.md` tóm tắt tín hiệu theo chủ đề, đầu mối, thống kê.
+- **Sao lưu / Khôi phục** (Màn 05, ô "Kho dữ liệu cục bộ"): tải cả kho ra file `.json` và nạp lại ở máy khác (gộp thêm hoặc thay thế toàn bộ). Đây là cách duy nhất để chia sẻ kho giữa các máy trong chế độ này. File sao lưu chứa dữ liệu nội bộ, không gửi ra ngoài.
+- "Máy xếp nhóm" (phân loại bằng Claude) không có ở đây: bài dán vào được gắn nhãn tạm bằng luật, cần người xem lại. Phân loại thật đã do script `reddit_ingest.py` làm trước khi xuất file.
+- Giới hạn: localStorage thường cho khoảng 5 MB (vài chục nghìn tín hiệu). Đầy thì trang báo "Kho đã đầy", cần Sao lưu rồi Xóa kho.
+- Nút "Reset giao diện demo" và Màn 08 chỉ dành cho bản thử giao diện; ở chế độ file nút này được ẩn.
 
-Mã giao diện giống hệt bản V19 trên claude.ai, chỉ tách từ một file thành bốn file. Bộ kiểm tự động (Playwright, 57 điểm kiểm) cho kết quả giống nhau trước và sau khi tách.
+Khi kho còn trống, trang hiện dữ liệu mẫu với nhãn "Ví dụ · chưa có số thật" như trước. Muốn cả team dùng chung một kho và script tự đẩy dữ liệu lên, cần bước tiếp theo: Lark Base làm kho + một dịch vụ trung gian nhỏ (chưa làm).
+
+Mã giao diện giống bản V19 trên claude.ai, tách thành bốn file cộng `localdb.js`; trên claude.ai (có `window.claude`) file này không làm gì.
 
 ## Script cho IT
 
