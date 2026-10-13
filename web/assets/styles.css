@@ -174,8 +174,10 @@ table.tbl .strong{color:var(--text-primary);font-weight:500}
 .consent{display:grid;gap:12px;padding:16px;border:2px solid rgba(91,140,255,.40);background:#0b1230}
 .consent label{display:grid;grid-template-columns:20px 1fr;gap:12px;font:400 14px/1.5 var(--font-sans);color:#d6dcf0}
 .consent .box{width:18px;height:18px;border:2px solid rgba(91,140,255,.70);margin-top:1px}
-.banner{background:#fff;border-bottom:2px solid #e6e9f2;padding:10px 16px;font:500 11px/1.4 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#535d84;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.banner{background:#fff;border-bottom:2px solid #e6e9f2;padding:10px 16px;font:500 11px/1.4 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#535d84;display:flex;justify-content:space-between;align-items:center;gap:12px 20px;flex-wrap:wrap}
+.banner .bn-msgs{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center}
 .banner .dot{color:#b05000}
+.banner .btn{padding:6px 12px;font-size:10px;flex:none}
 .opt input{appearance:none;-webkit-appearance:none;width:18px;height:18px;margin:0;border:2px solid rgba(91,140,255,.70);background:#070b1f;flex:none;display:grid;place-items:center;cursor:pointer}
 .opt input[type=radio]{border-radius:999px}
 .opt input:checked{background:#2f6bff;border-color:#2f6bff}
