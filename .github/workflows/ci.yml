@@ -49,6 +49,11 @@ jobs:
     needs: [web-check, scripts-selftest]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
+    # continue-on-error: repo riêng tư trên gói Free chưa bật được GitHub Pages,
+    # nên job này có thể báo lỗi "repository not found" — không phải lỗi code.
+    # Bật Settings → Pages → Source: GitHub Actions (cần gói trả phí nếu repo private)
+    # rồi bỏ dòng continue-on-error này.
+    continue-on-error: true
     permissions:
       pages: write
       id-token: write
