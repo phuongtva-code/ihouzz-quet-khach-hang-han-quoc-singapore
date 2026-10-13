@@ -55,6 +55,7 @@ jobs:
     # rồi bỏ dòng continue-on-error này.
     continue-on-error: true
     permissions:
+      contents: read   # khai báo quyền ở cấp job thì quyền không nêu bị đặt về none; checkout repo private cần dòng này
       pages: write
       id-token: write
     environment:
