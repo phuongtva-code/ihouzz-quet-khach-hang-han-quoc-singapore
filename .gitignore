@@ -1,0 +1,24 @@
+# Khóa và cấu hình riêng: KHÔNG đưa lên git (giữ .env.example)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Nhật ký, kết quả chạy, thư mục nhận file
+logs/
+out/
+open_data_scan/inbox/
+*.log
+*.jsonl
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Hệ điều hành, trình soạn thảo
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
