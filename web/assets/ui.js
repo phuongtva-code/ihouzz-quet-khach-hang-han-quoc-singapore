@@ -217,34 +217,36 @@
     }).join('');
   }
   function doReset(){
-    if(window.__realdb){
-      /* Chế độ file (localdb.js): kho trống thì trang vẫn là bản thử giao diện -> Reset chạy như cũ.
-         Kho đã có dữ liệu thật thì không có gì "demo" để reset; muốn xóa dữ liệu dùng "Xóa kho" ở Màn 05. */
-      var ldb=window.__localdb,c=ldb&&ldb.counts?ldb.counts():null;
-      var empty=c?!(c.sources+c.orgs+c.stats+c.signals):false;
-      if(!empty){
-        toast(c
-          ?'<b>Kho cục bộ đang có dữ liệu thật</b> — nút Reset chỉ làm mới bản thử giao diện. Muốn xóa dữ liệu, dùng <b>"Xóa kho"</b> ở Màn 05.'
-          :'<b>Không áp dụng ở đây:</b> trang đang nối kho dữ liệu thật — nút Reset chỉ dành cho bản thử giao diện.');
-        return;
+    /* Reset luôn làm việc thấy rõ: đưa toàn bộ giao diện về trạng thái ban đầu và báo kết quả.
+       - Có thao tác demo trong phiên -> lưu tóm tắt vào Màn 08 trước (như bản V19).
+       - Chế độ file (localdb.js) và kho cục bộ đang có dữ liệu -> hỏi: OK = xóa kho về dữ liệu mẫu,
+         Cancel = giữ dữ liệu, chỉ làm mới giao diện.
+       - Trên claude.ai (kho thật của nền tảng) thì không đụng dữ liệu, chỉ làm mới giao diện. */
+    var ldb=window.__localdb,c=(ldb&&ldb.counts)?ldb.counts():null;
+    var nStore=c?(c.sources+c.orgs+c.stats+c.signals):0;
+    var nAct=SESSLOG.length,notes=[];
+    if(nAct){
+      var counts=groupCounts(SESSLOG),summary=buildSummary(counts,nAct);
+      if(window.confirm('Lưu '+nAct+' thao tác vừa làm ('+summary+') vào "08 · Kết quả đã lưu" trước khi đưa giao diện về ban đầu?\n\nOK = lưu rồi reset · Cancel = reset, không lưu')){
+        var arr=loadSaved();
+        arr.push({savedAt:Date.now(),summary:summary,actions:SESSLOG.map(function(a){return a.label;})});
+        if(arr.length>50){arr=arr.slice(arr.length-50);}
+        notes.push(saveSaved(arr)?'đã lưu '+nAct+' thao tác vào Màn 08':'không lưu được vào trình duyệt (bộ nhớ đầy hoặc bị chặn)');
       }
     }
-    var nAct=SESSLOG.length;
-    if(!nAct){
-      resetS5();resetS4();resetS3();resetS2();resetS6();
-      toast('Giao diện demo đang ở trạng thái ban đầu — không có thao tác nào để lưu.');
-      return;
+    if(nStore&&ldb&&ldb.clear){
+      if(window.confirm('Kho cục bộ đang có '+nStore+' bản ghi (nguồn, đầu mối, tín hiệu, thống kê).\n\nOK = XÓA kho, đưa trang về dữ liệu mẫu · Cancel = giữ dữ liệu, chỉ làm mới giao diện\n(Muốn giữ lại thì bấm Cancel, vào Màn 05 "Sao lưu kho" trước.)')){
+        ldb.clear();notes.push('đã xóa kho cục bộ ('+nStore+' bản ghi)');
+      }else{notes.push('kho cục bộ giữ nguyên');}
+    }else if(window.__realdb&&!c){
+      notes.push('kho dữ liệu của trang giữ nguyên');
     }
-    var counts=groupCounts(SESSLOG),summary=buildSummary(counts,nAct);
-    if(!window.confirm('Lưu '+nAct+' thao tác vừa làm ('+summary+') vào "08 · Kết quả đã lưu", rồi đưa giao diện demo về trắng trơn như ban đầu?')){return;}
-    var arr=loadSaved();
-    arr.push({savedAt:Date.now(),summary:summary,actions:SESSLOG.map(function(a){return a.label;})});
-    if(arr.length>50){arr=arr.slice(arr.length-50);}
-    var ok=saveSaved(arr);
     resetS5();resetS4();resetS3();resetS2();resetS6();
     SESSLOG=[];
     renderS8();
-    toast(ok?('<b>Đã lưu kết quả</b> ('+summary+') ở Màn 08 — giao diện demo đã về trạng thái ban đầu.'):'<b>Không lưu được vào trình duyệt</b> (bộ nhớ đầy hoặc bị chặn) — giao diện vẫn đã về trạng thái ban đầu.');
+    show('s0');
+    try{window.scrollTo({top:0,behavior:'smooth'});}catch(e){}
+    toast('<b>Đã đưa giao diện về trạng thái ban đầu</b>'+(notes.length?' · '+notes.join(' · '):'')+'.');
   }
 
   initS2();
