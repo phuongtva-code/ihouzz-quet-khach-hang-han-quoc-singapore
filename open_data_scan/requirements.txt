@@ -1,0 +1,1 @@
+# Không cần thư viện ngoài: chỉ dùng thư viện chuẩn của Python 3.10 trở lên.

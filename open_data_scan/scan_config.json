@@ -1,0 +1,80 @@
+{
+  "_ghi_chu": "File cấu hình không chứa khóa hay mật khẩu. Khóa để trong file .env. Sửa danh sách từ khóa và quy tắc ở đây, không cần sửa code.",
+
+  "base": {
+    "app_token": "PB76bICpAaGF5bsxubHl0WPygqd",
+    "table_id": "tbl9PvlYusTt1dlm",
+    "lark_domain": "https://open.larksuite.com"
+  },
+
+  "columns": {
+    "name": "Tên doanh nghiệp",
+    "website": "Website",
+    "phone": "Điện thoại doanh nghiệp",
+    "address": "Địa chỉ",
+    "industry": "Ngành",
+    "region": "Khu vực",
+    "scan_date": "Ngày quét",
+    "source": "Nguồn dữ liệu",
+    "link": "Link nguồn",
+    "label": "AI đánh giá",
+    "reason": "Lý do AI đánh giá",
+    "email": "Email doanh nghiệp"
+  },
+
+  "limits": {
+    "max_new_rows_per_run": 60
+  },
+
+  "viet_signals": {
+    "_ghi_chu": "Từ khóa trong TÊN doanh nghiệp. strong = rõ ràng liên quan Việt Nam; weak = chỉ là gợi ý yếu (vd. 'pho' cũng là họ của người Hoa).",
+    "strong": ["vietnam", "vietnamese", "viet nam", "saigon", "sai gon", "hanoi", "ha noi", "ho chi minh", "베트남", "월남", "쌀국수"],
+    "weak": ["viet", "pho", "banh mi", "vina", "vn"]
+  },
+
+  "industry_rules": {
+    "_ghi_chu": "Suy ngành từ từ khóa trong tên, theo thứ tự từ trên xuống. Luôn ghi 'theo tên' vì chỉ là suy đoán.",
+    "default": "Chưa rõ ngành",
+    "rules": [
+      {"label": "Chuyển tiền, đổi tiền (theo tên)", "words": ["remittance", "remit", "money transfer", "money changer", "exchange"]},
+      {"label": "Du lịch (theo tên)", "words": ["travel", "travels", "tour", "tours", "tourism", "holiday", "holidays"]},
+      {"label": "Vận tải, giao nhận (theo tên)", "words": ["logistics", "freight", "shipping", "transport", "cargo", "forwarding", "courier", "express"]},
+      {"label": "Thương mại, xuất nhập khẩu (theo tên)", "words": ["trading", "trade", "import", "imports", "export", "exports", "supply", "supplies", "supplier", "distribution", "distributor", "wholesale"]},
+      {"label": "Tạp hóa, siêu thị (theo tên)", "words": ["mart", "minimart", "mini mart", "supermarket", "grocery", "groceries", "provision", "provisions"]},
+      {"label": "Ăn uống (theo tên)", "words": ["food", "foods", "restaurant", "cafe", "coffee", "kitchen", "cuisine", "bakery", "noodle", "noodles", "pho", "banh mi", "catering", "bistro", "eatery", "nha hang", "quan an"]},
+      {"label": "Làm đẹp (theo tên)", "words": ["beauty", "nail", "nails", "salon", "hair", "spa", "cosmetic", "cosmetics"]},
+      {"label": "Bất động sản (theo tên)", "words": ["property", "properties", "realty", "real estate"]},
+      {"label": "Tư vấn, giáo dục, nhân lực (theo tên)", "words": ["consulting", "consultancy", "advisory", "education", "training", "school", "academy", "manpower", "recruitment", "staffing", "employment", "agency", "matchmaker"]},
+      {"label": "Xây dựng, nội thất (theo tên)", "words": ["construction", "engineering", "building", "contractor", "interior", "renovation"]},
+      {"label": "Công nghệ (theo tên)", "words": ["technology", "technologies", "tech", "software", "digital", "solutions"]}
+    ]
+  },
+
+  "sg_acra": {
+    "_ghi_chu": "Nguồn: bộ 'Entities Registered with ACRA' trên data.gov.sg, theo Singapore Open Data Licence v1.0 (cho dùng thương mại và lưu trữ, bắt buộc ghi nguồn). Bộ này chỉ có tên, loại hình, tình trạng, đường, mã bưu chính. KHÔNG có điện thoại, website, ngành.",
+    "dataset_id": "d_3f960c10fed6145404ca7b821f263b87",
+    "api_url": "https://data.gov.sg/api/action/datastore_search",
+    "api_key_header": "x-api-key",
+    "source_label": "ACRA (data.gov.sg), Singapore Open Data Licence v1.0",
+    "search_keywords": ["vietnam", "vietnamese", "viet nam", "viet", "saigon", "hanoi", "ho chi minh", "pho", "banh mi"],
+    "status_include": ["Registered"],
+    "include_sole_proprietorship": false,
+    "sole_proprietorship_markers": ["sole", "proprietor"],
+    "page_size": 100,
+    "max_pages_per_keyword": 40,
+    "sleep_between_calls_sec": 1.0
+  },
+
+  "directory_import": {
+    "_ghi_chu": "Nạp từ file CSV do người chuẩn bị từ danh bạ công khai (hội doanh nghiệp, hội đoàn Việt tự công bố, website riêng của doanh nghiệp). Dùng cho Hàn Quốc và mọi nơi chưa có nguồn mở tự động.",
+    "inbox_dir": "inbox",
+    "allowed_regions": ["Hàn Quốc", "Singapore", "Quận Cam"],
+    "max_rows_per_file": 200,
+    "banned_url_patterns": [
+      "facebook\\.com", "fb\\.com", "fb\\.me", "messenger\\.com",
+      "linkedin\\.com", "instagram\\.com", "tiktok\\.com", "threads\\.net",
+      "twitter\\.com", "(^|[/.])x\\.com", "zalo\\.me", "t\\.me", "wa\\.me", "line\\.me", "kakao\\.com/(o|_)"
+    ],
+    "free_mail_domains": ["gmail.com", "googlemail.com", "yahoo.com", "ymail.com", "hotmail.com", "outlook.com", "live.com", "icloud.com", "naver.com", "daum.net", "hanmail.net", "kakao.com", "nate.com", "qq.com", "163.com"]
+  }
+}
