@@ -29,12 +29,13 @@ Giao diện dùng font Geist từ Google Fonts, nên cần có Internet để hi
 
 ## Giao diện chạy ngoài Claude thì khác gì
 
-Bản V19 gốc chạy trên claude.ai và dùng ba khả năng của nền tảng đó: kho dữ liệu trong trang (nguồn, thống kê, tổ chức, tín hiệu), "Máy xếp nhóm" do Claude phân loại bài, và nhận diện người xem để phân quyền. Trên GitLab Pages những khả năng này không có, nên:
+Bản V19 gốc chạy trên claude.ai và dùng ba khả năng của nền tảng đó: kho dữ liệu trong trang (nguồn, thống kê, tổ chức, tín hiệu), "Máy xếp nhóm" do Claude phân loại bài, và nhận diện người xem để phân quyền. Trên GitHub Pages những khả năng này không có, nên:
 
-- Trang tự rơi về **chế độ ví dụ**: hiện đủ 8 màn hình với dữ liệu mẫu, có nhãn "Ví dụ · chưa có số thật".
+- Trang tự rơi về **chế độ ví dụ**: hiện đủ 9 màn hình (00–08) với dữ liệu mẫu, có nhãn "Ví dụ · chưa có số thật".
 - "Thêm nguồn" chỉ thêm dòng thử vào bảng và báo rõ là bản thử, tải lại trang là mất.
+- Nút **"Reset giao diện demo"** (thanh trên cùng) tóm tắt các thao tác demo vừa làm vào Màn 08 "Kết quả đã lưu" (chỉ lưu trong trình duyệt đang dùng, localStorage) rồi đưa giao diện về dữ liệu mẫu ban đầu.
 - "Nạp dữ liệu" và "Nhận file từ máy chủ" (Màn 05) cần kho dữ liệu nên không dùng được.
-- Muốn số thật trên GitLab cần thêm một máy chủ lưu trữ (ví dụ Lark Base qua API). Phần này chưa làm.
+- Muốn số thật trên GitHub Pages cần thêm một máy chủ lưu trữ (ví dụ Lark Base qua API). Phần này chưa làm.
 
 Mã giao diện giống hệt bản V19 trên claude.ai, chỉ tách từ một file thành bốn file. Bộ kiểm tự động (Playwright, 57 điểm kiểm) cho kết quả giống nhau trước và sau khi tách.
 
