@@ -218,8 +218,16 @@
   }
   function doReset(){
     if(window.__realdb){
-      toast('<b>Không áp dụng ở đây:</b> trang đang nối kho dữ liệu thật — nút Reset chỉ dành cho bản thử giao diện.');
-      return;
+      /* Chế độ file (localdb.js): kho trống thì trang vẫn là bản thử giao diện -> Reset chạy như cũ.
+         Kho đã có dữ liệu thật thì không có gì "demo" để reset; muốn xóa dữ liệu dùng "Xóa kho" ở Màn 05. */
+      var ldb=window.__localdb,c=ldb&&ldb.counts?ldb.counts():null;
+      var empty=c?!(c.sources+c.orgs+c.stats+c.signals):false;
+      if(!empty){
+        toast(c
+          ?'<b>Kho cục bộ đang có dữ liệu thật</b> — nút Reset chỉ làm mới bản thử giao diện. Muốn xóa dữ liệu, dùng <b>"Xóa kho"</b> ở Màn 05.'
+          :'<b>Không áp dụng ở đây:</b> trang đang nối kho dữ liệu thật — nút Reset chỉ dành cho bản thử giao diện.');
+        return;
+      }
     }
     var nAct=SESSLOG.length;
     if(!nAct){

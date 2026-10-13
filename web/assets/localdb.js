@@ -164,7 +164,8 @@ function afterRender(){
   renderBanner();renderStorePanel();
 }
 function wireUI(){
-  var rs=$('bn-reset');if(rs){rs.style.display='none';}
+  /* Nút "Reset giao diện demo" giữ nguyên: khi kho trống trang vẫn là bản thử, Reset chạy như cũ
+     (xem doReset trong ui.js); khi kho có dữ liệu thật, nút chỉ báo và chỉ sang "Xóa kho". */
   buildStorePanel();
   var D=window.__dl;
   if(D&&D.renderAll&&!D.renderAll.__ldb){var orig=D.renderAll;D.renderAll=function(){orig();afterRender();};D.renderAll.__ldb=true;}
