@@ -104,7 +104,7 @@ function renderBanner(){
   var total=n.sources+n.orgs+n.stats+n.signals;
   el.textContent=total
     ?'● Kho cục bộ trên trình duyệt này · '+nf(n.sources)+' nguồn · '+nf(n.orgs)+' đầu mối · '+nf(n.signals)+' tín hiệu · '+nf(n.stats)+' dòng thống kê'
-    :'● Kho cục bộ đang trống — vào Màn 05 "Nhận file từ máy chủ" để nạp file .jsonl do script xuất ra';
+    :'● Kho cục bộ trống — nạp file .jsonl của script ở Màn 05 để có số thật';
   if(!persistent&&!warned){warned=true;toast('<b>Trình duyệt không cho lưu lâu dài</b> (chế độ ẩn danh hoặc bị chặn): dữ liệu chỉ còn tới khi đóng tab. Hãy Sao lưu trước khi đóng.');}
 }
 function renderStorePanel(){
