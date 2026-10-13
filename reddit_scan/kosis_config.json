@@ -1,0 +1,57 @@
+{
+  "_DOC_DAY_LA_GI": "File cấu hình cho kosis_ingest.py. Các khóa bắt đầu bằng dấu gạch dưới (_) chỉ là ghi chú, script bỏ qua. CÁC Ô orgId, tblId, itmId, objL1, prdSe ĐANG ĐỂ TRỐNG CÓ CHỦ ĐÍCH: người phát triển không biết chắc mã của bảng thật nên không điền. IT phải điền từ KOSIS. TUYỆT ĐỐI không đoán mã hay copy mã từ nơi không rõ nguồn: sai mã thì ra số của bảng khác mà vẫn trông như thật.",
+
+  "_CACH_TIM_MA": [
+    "Cần một bảng có ít nhất 2 chiều: (1) tỉnh/thành (시도) và (2) quốc tịch (국적); có thêm chiều giới tính (성별) thì lấy được cột female.",
+    "Cách 1 - tìm trên web: vào https://kosis.kr -> Thống kê tìm kiếm (통계검색) -> gõ từ khóa như: 외국인 국적 시도  (hoặc 국적별 외국인 시도). Mở bảng, chọn 'Việt Nam' (베트남) và các tỉnh/thành, chọn kỳ (năm hoặc tháng). Trong trang bảng bấm nút 'OpenAPI' / 'URL 생성' (tạo URL). KOSIS sẽ hiện một đường dẫn có dạng ...orgId=...&tblId=...&itmId=...&objL1=...&objL2=...&prdSe=... : chép từng giá trị đó vào các ô bên dưới.",
+    "Cách 2 - tra danh mục: vào https://kosis.kr/openapi -> 'OpenAPI 활용신청' -> mục 통계목록 (danh mục thống kê) để duyệt theo cơ quan và lấy orgId, tblId.",
+    "Với chiều nào muốn lấy TẤT CẢ mục (mọi tỉnh, mọi quốc tịch), ghi ALL vào objLn tương ứng. Chiều nào KOSIS yêu cầu mà bạn không muốn tách (ví dụ tuổi, tư cách lưu trú), chọn mục 'Tổng/계' bằng đúng mã mà URL 생성 đưa ra, nếu không script sẽ báo trùng số liệu và dừng.",
+    "Tên bảng có nhiều loại số khác nhau (người nước ngoài đăng ký/lưu trú, cư dân nước ngoài gồm cả người nhập tịch...). Chọn một bảng, ghi đúng tên vào ten_bang, và báo cho người vận hành biết bảng nào để không lẫn khi so sánh.",
+    "Chạy kiểm tra: python3 kosis_ingest.py --dry-run  (gọi KOSIS thật, in thử vài dòng, KHÔNG ghi file)."
+  ],
+
+  "api_url": "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+
+  "orgId": "",
+  "tblId": "",
+  "itmId": "",
+  "objL1": "",
+  "objL2": "",
+  "objL3": "",
+  "objL4": "",
+  "objL5": "",
+  "objL6": "",
+  "objL7": "",
+  "objL8": "",
+
+  "_prdSe": "Loại kỳ của bảng: Y = theo năm, M = theo tháng (chỉ hai loại này khớp định dạng của trang). Xem trong trang bảng KOSIS. Để trống = script dừng.",
+  "prdSe": "",
+  "_newestPrdCnt": "Lấy N kỳ gần nhất (1 = chỉ kỳ mới nhất, đủ cho chạy hằng ngày). Muốn nạp bù quá khứ lần đầu thì đặt số lớn hơn, hoặc dùng startPrdDe/endPrdDe bên dưới (ví dụ 2023 và 2025, hoặc 202301 và 202512). Nếu điền cả startPrdDe và endPrdDe thì ưu tiên hai ô đó.",
+  "newestPrdCnt": 1,
+  "startPrdDe": "",
+  "endPrdDe": "",
+
+  "_ten_bang": "Tên bảng (ghi vào trường src của từng dòng). Để trống thì lấy tên bảng KOSIS trả về trong dữ liệu.",
+  "ten_bang": "",
+  "_link_bang": "Link trang bảng trên KOSIS. Để trống thì script tự ghép từ orgId + tblId theo dạng https://kosis.kr/statHtml/statHtml.do?orgId=...&tblId=...",
+  "link_bang": "",
+
+  "_TRUC": "Mỗi chiều phân loại trong dữ liệu KOSIS có tên C1, C2, ... (tương ứng objL1, objL2, ...). Để trống = script tự nhận chiều theo tên chiều (행정구역/시도 = tỉnh; 국적 = quốc tịch; 성별 = giới tính) và DỪNG nếu không chắc. Nếu nhận sai hoặc báo mơ hồ, điền tay, ví dụ \"C1\".",
+  "truc_tinh": "",
+  "truc_quoc_tich": "",
+  "truc_gioi_tinh": "",
+
+  "_NHAN": "Tên mục (bằng tiếng Hàn) dùng để nhận diện. Chỉ đổi khi bảng dùng tên khác; khi không thấy 'Việt Nam' script sẽ in ra các quốc tịch nó thấy để bạn đối chiếu.",
+  "nhan_viet_nam": ["베트남"],
+  "nhan_tong": ["계", "합계", "전체"],
+  "nhan_nu": ["여자", "여성", "여"],
+  "nhan_nam": ["남자", "남성", "남"],
+
+  "_TEN_TRUONG": "Tên các trường trong dữ liệu KOSIS trả về. Mặc định theo tài liệu OpenAPI của KOSIS (người phát triển chưa kiểm chứng được với KOSIS thật). Nếu script báo thiếu trường, sửa ở đây theo danh sách trường script in ra.",
+  "ten_truong": {
+    "gia_tri": "DT",
+    "ky": "PRD_DE",
+    "don_vi": "UNIT_NM",
+    "ten_bang": "TBL_NM"
+  }
+}
